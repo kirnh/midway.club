@@ -17,7 +17,7 @@ This pushes your Hugo site to GitHub.'><meta name=author content="Midway Club"><
 ​	2.	Do not add a README, .gitignore, or license (we will handle this manually).
 ​	3.	Copy the repository URL (e.g., https://github.com/yourusername/midway-club.git).
 1.2: Initialize Git in Your Hugo Project
-git init git remote add origin https://github.com/yourusername/midway-club.git git branch -M main git add . git commit -m "Initial commit" git push -u origin main This pushes your Hugo site to GitHub.'><meta itemprop=datePublished content="2025-03-13T00:00:00+00:00"><meta itemprop=dateModified content="2025-03-13T00:00:00+00:00"><meta itemprop=wordCount content="297"><meta property="og:url" content="https://kirnh.github.io/midway-club/posts/deploy-hugo-site-to-github-pages/"><meta property="og:site_name" content="Midway Club"><meta property="og:title" content="Deploying Hugo site to GitHub Pages"><meta property="og:description" content='🚀 Step 1: Push Your Hugo Site to GitHub
+git init git remote add origin https://github.com/yourusername/midway-club.git git branch -M main git add . git commit -m "Initial commit" git push -u origin main This pushes your Hugo site to GitHub.'><meta itemprop=datePublished content="2025-03-13T00:00:00+00:00"><meta itemprop=dateModified content="2025-03-13T00:00:00+00:00"><meta itemprop=wordCount content="294"><meta property="og:url" content="https://kirnh.github.io/midway-club/posts/deploy-hugo-site-to-github-pages/"><meta property="og:site_name" content="Midway Club"><meta property="og:title" content="Deploying Hugo site to GitHub Pages"><meta property="og:description" content='🚀 Step 1: Push Your Hugo Site to GitHub
 1.1: Create a GitHub Repository
 ​	1.	Go to GitHub and create a new repository named midway-club.
 ​	2.	Do not add a README, .gitignore, or license (we will handle this manually).
@@ -51,6 +51,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+            submodules: true  # Ensures themes are pulled
+            fetch-depth: 0
 
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v2
@@ -63,11 +66,12 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./public
-</code></pre><p><strong>2.3: Commit & Push the Workflow</strong></p><pre tabindex=0><code>git add .github/workflows/deploy.yml
+          publish_branch: gh-page
+</code></pre><p>Make sure to add GH_PAT in the repository settings under <code>Secrets and variables > Actions > Secrets</code>.</p><p><strong>2.3: Commit & Push the Workflow</strong></p><pre tabindex=0><code>git add .github/workflows/deploy.yml
 git commit -m &#34;Add GitHub Actions for deployment&#34;
 git push origin main
 </code></pre><p>This will trigger a deployment workflow. You can check the <strong>“Actions”</strong> tab in your GitHub repository to see if it runs successfully.</p><hr><p><strong>🚀 Step 3: Enable GitHub Pages</strong></p><p>​ 1. Go to your GitHub repository <strong>Settings</strong> → <strong>Pages</strong>.</p><p>​ 2. Under “Branch,” select <strong>gh-pages</strong>.</p><p>​ 3. Save the settings.</p><pre><code>4.	Your website should now be live at:
-</code></pre><p><code>https://yourusername.github.io/midway-club/</code></p><hr><p><strong>🚀 Step 4: Connect Your Custom Domain</strong></p><p>Now, let’s connect your custom domain (e.g., midway.club).</p><p><strong>4.1: Add a CNAME Record in GitHub</strong></p><p>​ 1. In your <strong>GitHub repository</strong>, create a new file:</p></section><nav class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"><a class="justify-end pl-3 ltr:ml-auto rtl:mr-auto" href=https://kirnh.github.io/midway-club/posts/local-hugo-static-site-setup/><span>Local Hugo Static Website Setup</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a></nav></article></main><footer class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"><div class=mr-auto>&copy;2025<a class=link href=https://kirnh.github.io/midway-club/>Midway Club</a></div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>powered by hugo️️</a>️
+</code></pre><p><code>https://yourusername.github.io/midway-club/</code></p></section><nav class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"><a class="justify-end pl-3 ltr:ml-auto rtl:mr-auto" href=https://kirnh.github.io/midway-club/posts/local-hugo-static-site-setup/><span>Local Hugo Static Website Setup</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a></nav></article></main><footer class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"><div class=mr-auto>&copy;2025<a class=link href=https://kirnh.github.io/midway-club/>Midway Club</a></div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>powered by hugo️️</a>️
 <a class=link href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>hugo-paper</a></footer></body></html>
