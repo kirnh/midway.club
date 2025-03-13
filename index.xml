@@ -33,4 +33,17 @@ git push -u origin main
 cd dev-docs
 &lt;/code>&lt;/pre>&lt;p>&lt;strong>1.3: Choose a Theme&lt;/strong>&lt;/p>
 &lt;p>Hugo themes define the design of your site. You can pick one from &lt;a href="https://themes.gohugo.io/">https://themes.gohugo.io/&lt;/a>.&lt;/p>
-&lt;p>For a simple, aesthetic theme, let’s use &lt;strong>Paper&lt;/strong>:&lt;/p></description></item></channel></rss>
+&lt;p>For a simple, aesthetic theme, let’s use &lt;strong>Paper&lt;/strong>:&lt;/p></description></item><item><title>Raspberry Pi Headless Setup Guide</title><link>https://kirnh.github.io/midway-club/posts/raspberrypi-setup/</link><pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate><guid>https://kirnh.github.io/midway-club/posts/raspberrypi-setup/</guid><description>&lt;h1 id="raspberry-pi-headless-setup-guide">Raspberry Pi Headless Setup Guide&lt;/h1>
+&lt;p>Setting up a Raspberry Pi without a monitor, keyboard, or mouse (headless setup) is a convenient way to configure your Pi for remote use. This guide will walk you through the entire process, from flashing the OS to connecting via SSH and setting up Wi-Fi.&lt;/p>
+&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
+&lt;ul>
+&lt;li>A Raspberry Pi (any model, preferably with built-in Wi-Fi like the Raspberry Pi 4, 3B+)&lt;/li>
+&lt;li>A microSD card (16GB or larger, Class 10 recommended)&lt;/li>
+&lt;li>A microSD card reader&lt;/li>
+&lt;li>A power adapter suitable for your Raspberry Pi&lt;/li>
+&lt;li>A computer (Windows, macOS, or Linux)&lt;/li>
+&lt;li>A stable internet connection&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="step-1-download-raspberry-pi-os">Step 1: Download Raspberry Pi OS&lt;/h2>
+&lt;p>Raspberry Pi OS (formerly Raspbian) is the recommended operating system. You can download it from the official site:&lt;/p></description></item></channel></rss>
