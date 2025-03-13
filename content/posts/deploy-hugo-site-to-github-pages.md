@@ -90,3 +90,24 @@ This will trigger a deployment workflow. You can check the **“Actions”** tab
 
 ---
 
+**🚀 Step 3: Enable GitHub Pages**
+
+​	1.	Go to your GitHub repository **Settings** → **Pages**.
+
+​	2.	Under “Branch,” select **gh-pages**.
+
+​	3.	Save the settings.
+
+	4.	Your website should now be live at:
+
+`https://yourusername.github.io/midway-club/`
+
+---
+
+**🚀 Step 4: Connect Your Custom Domain**
+
+Now, let’s connect your custom domain (e.g., midway.club).
+
+**4.1: Add a CNAME Record in GitHub**
+
+​	1.	In your **GitHub repository**, create a new file:
