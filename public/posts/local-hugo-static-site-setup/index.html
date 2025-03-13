@@ -182,6 +182,7 @@ cd dev-docs
 git submodule add https://github.com/nanxiaobei/hugo-paper themes/paper
 </code></pre><p>Enable the theme in config.toml:</p>
 <p><code>echo 'theme = &quot;paper&quot;' &gt;&gt; config.toml</code></p>
+<p>Remove hugo.toml if it exists.</p>
 <p><strong>1.4 Add Homepage</strong></p>
 <pre tabindex="0"><code>mkdir -p content
 echo -e &#34;---\ntitle: \&#34;Home\&#34;\ndraft: false\n---\n\nWelcome to my development documentation site!&#34; &gt; content/_index.md
@@ -242,7 +243,11 @@ git push -u origin main
 </ul>
 </section>
 
-  </article></main><footer
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/posts/deploy-hugo-site-to-github-pages/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Deploying Hugo site to GitHub Pages</span></a
+    ></nav></article></main><footer
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
   <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/">Midway Club</a></div>

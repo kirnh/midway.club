@@ -20,16 +20,24 @@
   />
 
   
-  <title>Midway Club</title>
+  <title>Deploying Hugo site to GitHub Pages-Midway Club</title>
 
   
   <meta name="theme-color" />
 
-  
-  <meta
-    name="description"
-    content="A personal blog"
-  />
+  <meta name="description" content="🚀 Step 1: Push Your Hugo Site to GitHub
+1.1: Create a GitHub Repository
+​	1.	Go to GitHub and create a new repository named midway-club.
+​	2.	Do not add a README, .gitignore, or license (we will handle this manually).
+​	3.	Copy the repository URL (e.g., https://github.com/yourusername/midway-club.git).
+1.2: Initialize Git in Your Hugo Project
+git init
+git remote add origin https://github.com/yourusername/midway-club.git
+git branch -M main
+git add .
+git commit -m &#34;Initial commit&#34;
+git push -u origin main
+This pushes your Hugo site to GitHub." />
   <meta name="author" content="Midway Club" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
 
   
@@ -39,7 +47,11 @@
 
   
 
-  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
 
   
   <link
@@ -127,25 +139,75 @@
 </header>
 <main
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
-    >
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Deploying Hugo site to GitHub Pages</h1><div class="text-xs antialiased opacity-60"><time>Mar 13, 2025</time></div></header>
 
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Deploying Hugo site to GitHub Pages</h2>
-  <time class="text-xs antialiased opacity-60"
-    >Mar 13, 2025</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="http://localhost:1313/posts/deploy-hugo-site-to-github-pages/"
-    >Deploying Hugo site to GitHub Pages</a
-  >
+  <section><p><strong>🚀 Step 1: Push Your Hugo Site to GitHub</strong></p>
+<p><strong>1.1: Create a GitHub Repository</strong></p>
+<p>​	1.	Go to <a href="https://github.com/">GitHub</a> and create a <strong>new repository</strong> named midway-club.</p>
+<p>​	2.	<strong>Do not</strong> add a README, .gitignore, or license (we will handle this manually).</p>
+<p>​	3.	Copy the repository URL (e.g., <a href="https://github.com/yourusername/midway-club.git)">https://github.com/yourusername/midway-club.git)</a>.</p>
+<p><strong>1.2: Initialize Git in Your Hugo Project</strong></p>
+<pre tabindex="0"><code>git init
+git remote add origin https://github.com/yourusername/midway-club.git
+git branch -M main
+git add .
+git commit -m &#34;Initial commit&#34;
+git push -u origin main
+</code></pre><p>This pushes your Hugo site to GitHub.</p>
+<hr>
+<p><strong>🚀 Step 2: Set Up GitHub Actions for Auto-Deployment</strong></p>
+<p>GitHub Actions will <strong>automatically deploy</strong> your site when you push changes.</p>
+<p><strong>2.1: Create a GitHub Actions Workflow</strong></p>
+<p>Run:</p>
+<pre tabindex="0"><code>mkdir -p .github/workflows
+touch .github/workflows/deploy.yml
+</code></pre><p><strong>2.2: Add Deployment Script</strong></p>
+<p>Edit .github/workflows/deploy.yml and add this:</p>
+<pre tabindex="0"><code>name: Deploy Hugo Site
+
+on:
+  push:
+    branches:
+      - main  # Runs on every push to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: &#39;latest&#39;
+
+      - name: Build Site
+        run: hugo --minify
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+</code></pre><p><strong>2.3: Commit &amp; Push the Workflow</strong></p>
+<pre tabindex="0"><code>git add .github/workflows/deploy.yml
+git commit -m &#34;Add GitHub Actions for deployment&#34;
+git push origin main
+</code></pre><p>This will trigger a deployment workflow. You can check the <strong>“Actions”</strong> tab in your GitHub repository to see if it runs successfully.</p>
+<hr>
 </section>
 
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Local Hugo Static Website Setup</h2>
-  <time class="text-xs antialiased opacity-60"
-    >Mar 13, 2025</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="http://localhost:1313/posts/local-hugo-static-site-setup/"
-    >Local Hugo Static Website Setup</a
-  >
-</section></main><footer
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="http://localhost:1313/posts/local-hugo-static-site-setup/"
+      ><span>Local Hugo Static Website Setup</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav></article></main><footer
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
   <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/">Midway Club</a></div>

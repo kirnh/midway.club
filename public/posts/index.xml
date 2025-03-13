@@ -9,6 +9,13 @@
     <lastBuildDate>Thu, 13 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Deploying Hugo site to GitHub Pages</title>
+      <link>http://localhost:1313/posts/deploy-hugo-site-to-github-pages/</link>
+      <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/deploy-hugo-site-to-github-pages/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;🚀 Step 1: Push Your Hugo Site to GitHub&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;1.1: Create a GitHub Repository&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;​&#x9;1.&#x9;Go to &lt;a href=&#34;https://github.com/&#34;&gt;GitHub&lt;/a&gt; and create a &lt;strong&gt;new repository&lt;/strong&gt; named midway-club.&lt;/p&gt;&#xA;&lt;p&gt;​&#x9;2.&#x9;&lt;strong&gt;Do not&lt;/strong&gt; add a README, .gitignore, or license (we will handle this manually).&lt;/p&gt;&#xA;&lt;p&gt;​&#x9;3.&#x9;Copy the repository URL (e.g., &lt;a href=&#34;https://github.com/yourusername/midway-club.git)&#34;&gt;https://github.com/yourusername/midway-club.git)&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;1.2: Initialize Git in Your Hugo Project&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git init&#xA;git remote add origin https://github.com/yourusername/midway-club.git&#xA;git branch -M main&#xA;git add .&#xA;git commit -m &amp;#34;Initial commit&amp;#34;&#xA;git push -u origin main&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This pushes your Hugo site to GitHub.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Local Hugo Static Website Setup</title>
       <link>http://localhost:1313/posts/local-hugo-static-site-setup/</link>
       <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
