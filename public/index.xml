@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Welcome to the Midway Club documentation. on Midway Club</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Welcome to the Midway Club documentation. on Midway Club</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Local Hugo Static Website Setup</title>
+      <link>http://localhost:1313/posts/local-hugo-static-site-setup/</link>
+      <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/local-hugo-static-site-setup/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;1.1: Install Hugo&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Hugo is a static site generator that is simple to use. Install it based on your OS:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;macOS (Homebrew)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;brew install hugo&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Windows (Chocolatey)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;choco install hugo -confirm&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Ubuntu/Debian&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;sudo apt install hugo&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;1.2: Create Your Site&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Run:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo new site dev-docs&#xA;cd dev-docs&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;1.3: Choose a Theme&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Hugo themes define the design of your site. You can pick one from &lt;a href=&#34;https://themes.gohugo.io/&#34;&gt;https://themes.gohugo.io/&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;For a simple, aesthetic theme, let’s use &lt;strong&gt;Paper&lt;/strong&gt;:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
