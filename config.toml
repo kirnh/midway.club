@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/"
+baseURL = "https://kirnh.github.io/midway-club/""
 languageCode = "en-us"
 title = "Midway Club"
 theme = "paper"  # Or the theme you installed
