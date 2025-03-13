@@ -3,8 +3,6 @@ date: 2025-03-13
 title: "Deploying Hugo site to GitHub Pages"
 ---
 
-
-
 **🚀 Step 1: Push Your Hugo Site to GitHub**
 
 **1.1: Create a GitHub Repository**
@@ -62,6 +60,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+            submodules: true  # Ensures themes are pulled
+            fetch-depth: 0
 
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v2
@@ -74,9 +75,12 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./public
+          publish_branch: gh-page
 ```
+
+Make sure to add GH_PAT in the repository settings under `Secrets and variables > Actions > Secrets`.
 
 **2.3: Commit & Push the Workflow**
 
@@ -101,13 +105,3 @@ This will trigger a deployment workflow. You can check the **“Actions”** tab
 	4.	Your website should now be live at:
 
 `https://yourusername.github.io/midway-club/`
-
----
-
-**🚀 Step 4: Connect Your Custom Domain**
-
-Now, let’s connect your custom domain (e.g., midway.club).
-
-**4.1: Add a CNAME Record in GitHub**
-
-​	1.	In your **GitHub repository**, create a new file:
