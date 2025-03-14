@@ -1,0 +1,77 @@
+{{ define "main" }}
+<div id="home-fullscreen">
+  <div id="home-bg"></div>
+  <div id="home-text">
+    <h1>The Future of Conversations - Where Words Meet Understanding.</h1>
+  </div>
+</div>
+
+<style>
+  /* Reset any theme containers */
+  body, html {
+    overflow-x: hidden !important;
+  }
+  
+  .main, .container, .content, article, .post-single, main {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Full screen container */
+  #home-fullscreen {
+    position: relative !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    /* Push content down to account for header */
+    margin-top: -80px !important; /* Adjust based on your header height */
+    /* Add padding to account for header */
+    padding-top: 80px !important; /* Should match the negative margin-top */
+  }
+  
+  /* Background image */
+  #home-bg {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-image: url('{{ .Site.BaseURL }}images/home-background.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    filter: brightness(0.7) !important;
+    z-index: -1 !important; /* Behind everything */
+  }
+  
+  /* Centered text */
+  #home-text {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center !important;
+    color: white !important;
+    width: 90% !important;
+    max-width: 800px !important;
+    z-index: 1 !important;
+  }
+  
+  #home-text h1 {
+    font-size: 2.5rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+    color: white !important;
+  }
+  
+  @media (min-width: 768px) {
+    #home-text h1 {
+      font-size: 3rem !important;
+    }
+  }
+</style>
+{{ end }} 

@@ -138,51 +138,82 @@
 <main
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
     >
+<div id="home-fullscreen">
+  <div id="home-bg"></div>
+  <div id="home-text">
+    <h1>The Future of Conversations - Where Words Meet Understanding.</h1>
+  </div>
+</div>
 
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Persistent Bluetooth Connection Between Raspberry Pi and iPad</h2>
-  <time class="text-xs antialiased opacity-60"
-    >Mar 14, 2025</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="http://localhost:1313/midway-club/posts/raspberrypi-ipad-bluetooth/"
-    >Persistent Bluetooth Connection Between Raspberry Pi and iPad</a
-  >
-</section>
-
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Streaming Audio from Raspberry Pi to iPad via Bluetooth</h2>
-  <time class="text-xs antialiased opacity-60"
-    >Mar 14, 2025</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="http://localhost:1313/midway-club/posts/stream-audio-pi-ipad/"
-    >Streaming Audio from Raspberry Pi to iPad via Bluetooth</a
-  >
-</section>
-
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Deploying Hugo site to GitHub Pages</h2>
-  <time class="text-xs antialiased opacity-60"
-    >Mar 13, 2025</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="http://localhost:1313/midway-club/posts/deploy-hugo-site-to-github-pages/"
-    >Deploying Hugo site to GitHub Pages</a
-  >
-</section>
-
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Local Hugo Static Website Setup</h2>
-  <time class="text-xs antialiased opacity-60"
-    >Mar 13, 2025</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="http://localhost:1313/midway-club/posts/local-hugo-static-site-setup/"
-    >Local Hugo Static Website Setup</a
-  >
-</section>
-
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Raspberry Pi Headless Setup Guide</h2>
-  <time class="text-xs antialiased opacity-60"
-    >Mar 13, 2025</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="http://localhost:1313/midway-club/posts/raspberrypi-setup/"
-    >Raspberry Pi Headless Setup Guide</a
-  >
-</section></main><footer
+<style>
+   
+  body, html {
+    overflow-x: hidden !important;
+  }
+  
+  .main, .container, .content, article, .post-single, main {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+   
+  #home-fullscreen {
+    position: relative !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+     
+    margin-top: -80px !important;  
+     
+    padding-top: 80px !important;  
+  }
+  
+   
+  #home-bg {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-image: url('http://localhost:1313/midway-club/images/home-background.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    filter: brightness(0.7) !important;
+    z-index: -1 !important;  
+  }
+  
+   
+  #home-text {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center !important;
+    color: white !important;
+    width: 90% !important;
+    max-width: 800px !important;
+    z-index: 1 !important;
+  }
+  
+  #home-text h1 {
+    font-size: 2.5rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+    color: white !important;
+  }
+  
+  @media (min-width: 768px) {
+    #home-text h1 {
+      font-size: 3rem !important;
+    }
+  }
+</style>
+</main><footer
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
   <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/midway-club/">Midway</a></div>

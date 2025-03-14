@@ -15,3 +15,6 @@ theme = "paper"
     name = "About"
     url = "/about/"
     weight = 20
+
+[params]
+  customCSS = ["css/custom.css"]
