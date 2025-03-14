@@ -20,24 +20,15 @@
   />
 
   
-  <title>Deploying Hugo site to GitHub Pages-Midway</title>
+  <title>About-Midway</title>
 
   
   <meta name="theme-color" />
 
-  <meta name="description" content="🚀 Step 1: Push Your Hugo Site to GitHub
-1.1: Create a GitHub Repository
-​	1.	Go to GitHub and create a new repository named midway-club.
-​	2.	Do not add a README, .gitignore, or license (we will handle this manually).
-​	3.	Copy the repository URL (e.g., https://github.com/yourusername/midway-club.git).
-1.2: Initialize Git in Your Hugo Project
-git init
-git remote add origin https://github.com/yourusername/midway-club.git
-git branch -M main
-git add .
-git commit -m &#34;Initial commit&#34;
-git push -u origin main
-This pushes your Hugo site to GitHub." />
+  <meta name="description" content="Conversations Shape Our Lives. Midway Makes Them Better.
+
+At Midway, we believe that communication is more than just words—it’s the foundation of every meaningful relationship. Whether with a partner, a friend, or a loved one, the quality of our conversations shapes the depth of our connections, our emotional well-being, and even our overall happiness.
+Yet, in today’s world, distractions, misunderstandings, and misaligned expectations often create barriers to true connection. Unspoken feelings lead to distance. Misinterpreted words spark conflict. Busy lives replace deep conversations with surface-level exchanges." />
   <meta name="author" content="Midway" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/midway-club/main.min.css" />
 
   
@@ -151,87 +142,42 @@ This pushes your Hugo site to GitHub." />
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
     ><article>
   <header class="mb-14">
-    <h1 class="my-0! pb-2.5">Deploying Hugo site to GitHub Pages</h1><div class="text-xs antialiased opacity-60"><time>Mar 13, 2025</time></div></header>
+    <h1 class="my-0! pb-2.5">About</h1></header>
 
-  <section><p><strong>🚀 Step 1: Push Your Hugo Site to GitHub</strong></p>
-<p><strong>1.1: Create a GitHub Repository</strong></p>
-<p>​	1.	Go to <a href="https://github.com/">GitHub</a> and create a <strong>new repository</strong> named midway-club.</p>
-<p>​	2.	<strong>Do not</strong> add a README, .gitignore, or license (we will handle this manually).</p>
-<p>​	3.	Copy the repository URL (e.g., <a href="https://github.com/yourusername/midway-club.git)">https://github.com/yourusername/midway-club.git)</a>.</p>
-<p><strong>1.2: Initialize Git in Your Hugo Project</strong></p>
-<pre tabindex="0"><code>git init
-git remote add origin https://github.com/yourusername/midway-club.git
-git branch -M main
-git add .
-git commit -m &#34;Initial commit&#34;
-git push -u origin main
-</code></pre><p>This pushes your Hugo site to GitHub.</p>
+  <section><h1 id="conversations-shape-our-lives-midway-makes-them-better">Conversations Shape Our Lives. Midway Makes Them Better.</h1>
 <hr>
-<p><strong>🚀 Step 2: Set Up GitHub Actions for Auto-Deployment</strong></p>
-<p>GitHub Actions will <strong>automatically deploy</strong> your site when you push changes.</p>
-<p><strong>2.1: Create a GitHub Actions Workflow</strong></p>
-<p>Run:</p>
-<pre tabindex="0"><code>mkdir -p .github/workflows
-touch .github/workflows/deploy.yml
-</code></pre><p><strong>2.2: Add Deployment Script</strong></p>
-<p>Edit .github/workflows/deploy.yml and add this:</p>
-<pre tabindex="0"><code>name: Deploy Hugo Site
-
-on:
-  push:
-    branches:
-      - main  # Runs on every push to main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-            submodules: true  # Ensures themes are pulled
-            fetch-depth: 0
-
-      - name: Install Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: &#39;latest&#39;
-
-      - name: Build Site
-        run: hugo --minify
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GH_PAT }}
-          publish_dir: ./public
-          publish_branch: gh-page
-</code></pre><p>Make sure to add GH_PAT in the repository settings under <code>Secrets and variables &gt; Actions &gt; Secrets</code>.</p>
-<p><strong>2.3: Commit &amp; Push the Workflow</strong></p>
-<pre tabindex="0"><code>git add .github/workflows/deploy.yml
-git commit -m &#34;Add GitHub Actions for deployment&#34;
-git push origin main
-</code></pre><p>This will trigger a deployment workflow. You can check the <strong>“Actions”</strong> tab in your GitHub repository to see if it runs successfully.</p>
+<p>At Midway, we believe that communication is more than just words—it’s the foundation of every meaningful relationship. Whether with a partner, a friend, or a loved one, the quality of our conversations shapes the depth of our connections, our emotional well-being, and even our overall happiness.</p>
+<p>Yet, in today’s world, distractions, misunderstandings, and misaligned expectations often create barriers to true connection. Unspoken feelings lead to distance. Misinterpreted words spark conflict. Busy lives replace deep conversations with surface-level exchanges.</p>
 <hr>
-<p><strong>🚀 Step 3: Enable GitHub Pages</strong></p>
-<p>​	1.	Go to your GitHub repository <strong>Settings</strong> → <strong>Pages</strong>.</p>
-<p>​	2.	Under “Branch,” select <strong>gh-pages</strong>.</p>
-<p>​	3.	Save the settings.</p>
-<pre><code>4.	Your website should now be live at:
-</code></pre>
-<p><code>https://yourusername.github.io/midway-club/</code></p>
+<h2 id="why-healthy-conversations-matter">Why Healthy Conversations Matter</h2>
+<p>Strong, fulfilling relationships are linked to better mental health, lower stress, and greater overall life satisfaction. Studies show that people in emotionally connected relationships live longer, are more resilient to challenges, and experience higher levels of joy.</p>
+<p>But communication breakdowns—small or large—can weaken these bonds. What if there was a way to notice these patterns, bridge the gaps, and ensure conversations bring us closer rather than further apart?</p>
+<hr>
+<h2 id="introducing-midway-the-ai-powered-relationship-companion">Introducing Midway: The AI-Powered Relationship Companion</h2>
+<p>Midway is a smart, AI-enhanced conversation microphone designed to improve communication by offering real-time insights into tone, engagement, and speech dynamics. By listening and analyzing in the background, Midway helps couples and loved ones recognize miscommunication patterns, adjust emotional tone, and enhance connection without disrupting natural dialogue.</p>
+<hr>
+<h2 id="how-midway-helps">How Midway Helps</h2>
+<ul>
+<li>💬 Resolve Hidden Conflicts – Detect tension points before they escalate and foster clarity in conversations.</li>
+<li>🎙️ Enhance Understanding – Get personalized feedback on tone, speaking balance, and engagement levels.</li>
+<li>❤️ Strengthen Emotional Bonds – Develop deeper empathy and awareness in your relationships.</li>
+<li>📊 AI-Powered Insights – Learn what works and what doesn’t in your conversations to create healthier communication habits.</li>
+<li>🌱 Personal Growth, Together – Midway encourages mindful communication, making each interaction more meaningful and fulfilling.</li>
+</ul>
+<hr>
+<h2 id="the-impact-of-using-midway">The Impact of Using Midway</h2>
+<p>By helping you speak with intention, listen with empathy, and bridge conversational gaps, Midway transforms not just how you talk—but how you connect. The result?</p>
+<ul>
+<li>✅ More fulfilling relationships</li>
+<li>✅ Less stress and frustration in communication</li>
+<li>✅ Deeper understanding and emotional safety</li>
+<li>✅ A stronger, healthier, and happier life</li>
+</ul>
+<hr>
+<p>It all starts with a conversation. Let’s make every one count—with Midway.</p>
 </section>
 
-  <nav
-    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
-  ><a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/midway-club/posts/stream-audio-pi-ipad/"
-      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Streaming Audio from Raspberry Pi to iPad via Bluetooth</span></a
-    ><a
-      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
-      href="http://localhost:1313/midway-club/posts/local-hugo-static-site-setup/"
-      ><span>Local Hugo Static Website Setup</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
-    ></nav></article></main><footer
+  </article></main><footer
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
   <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/midway-club/">Midway</a></div>
