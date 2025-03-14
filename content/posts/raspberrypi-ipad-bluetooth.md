@@ -1,9 +1,7 @@
 ---
 Date: 2025-03-14
-title: Ensuring a Persistent Bluetooth Connection Between Raspberry Pi and iPad
+title: Persistent Bluetooth Connection Between Raspberry Pi and iPad
 ---
-
-# Ensuring a Persistent Bluetooth Connection Between Raspberry Pi and iPad
 
 ## Overview
 This guide walks you through the process of:
