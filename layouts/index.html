@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div id="home-fullscreen">
+<div id="home-fullscreen" class="theme-light">
   <div id="home-bg"></div>
   
   <!-- Asymmetrical crossing lines -->
@@ -13,48 +13,47 @@
 </div>
 
 <script>
-  // Script to sync our home page with the theme's dark mode and randomize line positions
+  // Script to handle theme changes and line movement
   document.addEventListener('DOMContentLoaded', function() {
-    // Track previous theme state
-    let wasDarkMode = false;
+    const homeContainer = document.getElementById('home-fullscreen');
+    let currentTheme = 'light';
     
-    // Initial sync
-    syncWithTheme();
+    // Initial randomization
+    randomizeLines();
     
-    // Watch for changes in the DOM that might indicate theme changes
+    // Watch for theme changes from the theme itself
     const observer = new MutationObserver(function(mutations) {
-      syncWithTheme();
-    });
-    
-    // Observe the html or body element for class changes
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    
-    function syncWithTheme() {
-      // Check if the theme is in dark mode
-      const isDarkMode = document.documentElement.classList.contains('dark') || 
-                         document.body.classList.contains('dark') ||
-                         document.documentElement.dataset.theme === 'dark' ||
-                         document.body.dataset.theme === 'dark';
-      
-      // Apply appropriate styles
-      const homeContainer = document.getElementById('home-fullscreen');
-      if (homeContainer) {
-        if (isDarkMode) {
-          homeContainer.classList.add('theme-dark');
-          homeContainer.classList.remove('theme-light');
-        } else {
-          homeContainer.classList.add('theme-light');
-          homeContainer.classList.remove('theme-dark');
-        }
-        
-        // If theme changed, randomize line positions
-        if (isDarkMode !== wasDarkMode) {
-          randomizeLines();
-          wasDarkMode = isDarkMode;
+      for (const mutation of mutations) {
+        if (mutation.type === 'attributes' && 
+            (mutation.attributeName === 'class' || mutation.attributeName === 'data-theme')) {
+          
+          const isDarkMode = document.documentElement.classList.contains('dark') || 
+                             document.body.classList.contains('dark') ||
+                             document.documentElement.dataset.theme === 'dark' ||
+                             document.body.dataset.theme === 'dark';
+          
+          if ((isDarkMode && currentTheme !== 'dark') || (!isDarkMode && currentTheme !== 'light')) {
+            // Theme has changed
+            currentTheme = isDarkMode ? 'dark' : 'light';
+            
+            if (isDarkMode) {
+              homeContainer.classList.remove('theme-light');
+              homeContainer.classList.add('theme-dark');
+            } else {
+              homeContainer.classList.remove('theme-dark');
+              homeContainer.classList.add('theme-light');
+            }
+            
+            // Randomize line positions
+            randomizeLines();
+          }
         }
       }
-    }
+    });
+    
+    // Observe both html and body for class changes
+    observer.observe(document.documentElement, { attributes: true });
+    observer.observe(document.body, { attributes: true });
     
     // Function to randomize line positions
     function randomizeLines() {
@@ -72,19 +71,20 @@
         const left2 = -10 - Math.random() * 10; // -10% to -20%
         const angle2 = 10 + Math.random() * 20; // 10deg to 30deg
         
-        // Apply new styles
-        line1.style.top = `${top1}%`;
-        line1.style.right = `${right1}%`;
-        line1.style.transform = `rotate(${angle1}deg)`;
+        // Apply new styles with !important to override CSS
+        line1.style.cssText = `
+          top: ${top1}% !important;
+          right: ${right1}% !important;
+          transform: rotate(${angle1}deg) !important;
+        `;
         
-        line2.style.top = `${top2}%`;
-        line2.style.left = `${left2}%`;
-        line2.style.transform = `rotate(${angle2}deg)`;
+        line2.style.cssText = `
+          top: ${top2}% !important;
+          left: ${left2}% !important;
+          transform: rotate(${angle2}deg) !important;
+        `;
       }
     }
-    
-    // Also randomize on page load
-    randomizeLines();
   });
 </script>
 

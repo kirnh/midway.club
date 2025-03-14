@@ -138,7 +138,7 @@
 <main
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
     >
-<div id="home-fullscreen">
+<div id="home-fullscreen" class="theme-light">
   <div id="home-bg"></div>
   
   
@@ -154,46 +154,45 @@
 <script>
   
   document.addEventListener('DOMContentLoaded', function() {
+    const homeContainer = document.getElementById('home-fullscreen');
+    let currentTheme = 'light';
     
-    let wasDarkMode = false;
     
-    
-    syncWithTheme();
+    randomizeLines();
     
     
     const observer = new MutationObserver(function(mutations) {
-      syncWithTheme();
+      for (const mutation of mutations) {
+        if (mutation.type === 'attributes' && 
+            (mutation.attributeName === 'class' || mutation.attributeName === 'data-theme')) {
+          
+          const isDarkMode = document.documentElement.classList.contains('dark') || 
+                             document.body.classList.contains('dark') ||
+                             document.documentElement.dataset.theme === 'dark' ||
+                             document.body.dataset.theme === 'dark';
+          
+          if ((isDarkMode && currentTheme !== 'dark') || (!isDarkMode && currentTheme !== 'light')) {
+            
+            currentTheme = isDarkMode ? 'dark' : 'light';
+            
+            if (isDarkMode) {
+              homeContainer.classList.remove('theme-light');
+              homeContainer.classList.add('theme-dark');
+            } else {
+              homeContainer.classList.remove('theme-dark');
+              homeContainer.classList.add('theme-light');
+            }
+            
+            
+            randomizeLines();
+          }
+        }
+      }
     });
     
     
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    
-    function syncWithTheme() {
-      
-      const isDarkMode = document.documentElement.classList.contains('dark') || 
-                         document.body.classList.contains('dark') ||
-                         document.documentElement.dataset.theme === 'dark' ||
-                         document.body.dataset.theme === 'dark';
-      
-      
-      const homeContainer = document.getElementById('home-fullscreen');
-      if (homeContainer) {
-        if (isDarkMode) {
-          homeContainer.classList.add('theme-dark');
-          homeContainer.classList.remove('theme-light');
-        } else {
-          homeContainer.classList.add('theme-light');
-          homeContainer.classList.remove('theme-dark');
-        }
-        
-        
-        if (isDarkMode !== wasDarkMode) {
-          randomizeLines();
-          wasDarkMode = isDarkMode;
-        }
-      }
-    }
+    observer.observe(document.documentElement, { attributes: true });
+    observer.observe(document.body, { attributes: true });
     
     
     function randomizeLines() {
@@ -212,18 +211,19 @@
         const angle2 = 10 + Math.random() * 20; 
         
         
-        line1.style.top = `${top1}%`;
-        line1.style.right = `${right1}%`;
-        line1.style.transform = `rotate(${angle1}deg)`;
+        line1.style.cssText = `
+          top: ${top1}% !important;
+          right: ${right1}% !important;
+          transform: rotate(${angle1}deg) !important;
+        `;
         
-        line2.style.top = `${top2}%`;
-        line2.style.left = `${left2}%`;
-        line2.style.transform = `rotate(${angle2}deg)`;
+        line2.style.cssText = `
+          top: ${top2}% !important;
+          left: ${left2}% !important;
+          transform: rotate(${angle2}deg) !important;
+        `;
       }
     }
-    
-    
-    randomizeLines();
   });
 </script>
 
