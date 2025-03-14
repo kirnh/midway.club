@@ -140,6 +140,11 @@
     >
 <div id="home-fullscreen">
   <div id="home-bg"></div>
+  
+  
+  <div class="line line-1"></div>
+  <div class="line line-2"></div>
+  
   <div id="home-text">
     <h1>The Future of Conversations</h1>
     <p class="tagline">Where Words Meet Understanding</p>
@@ -149,6 +154,9 @@
 <script>
   
   document.addEventListener('DOMContentLoaded', function() {
+    
+    let wasDarkMode = false;
+    
     
     syncWithTheme();
     
@@ -178,8 +186,44 @@
           homeContainer.classList.add('theme-light');
           homeContainer.classList.remove('theme-dark');
         }
+        
+        
+        if (isDarkMode !== wasDarkMode) {
+          randomizeLines();
+          wasDarkMode = isDarkMode;
+        }
       }
     }
+    
+    
+    function randomizeLines() {
+      const line1 = document.querySelector('.line-1');
+      const line2 = document.querySelector('.line-2');
+      
+      if (line1 && line2) {
+        
+        const top1 = -10 - Math.random() * 10; 
+        const right1 = Math.random() * 40; 
+        const angle1 = -20 - Math.random() * 25; 
+        
+        
+        const top2 = 10 + Math.random() * 30; 
+        const left2 = -10 - Math.random() * 10; 
+        const angle2 = 10 + Math.random() * 20; 
+        
+        
+        line1.style.top = `${top1}%`;
+        line1.style.right = `${right1}%`;
+        line1.style.transform = `rotate(${angle1}deg)`;
+        
+        line2.style.top = `${top2}%`;
+        line2.style.left = `${left2}%`;
+        line2.style.transform = `rotate(${angle2}deg)`;
+      }
+    }
+    
+    
+    randomizeLines();
   });
 </script>
 
@@ -209,6 +253,34 @@
   }
   
    
+  .line {
+    position: absolute !important;
+    z-index: 1 !important;
+    opacity: 0.5 !important;  
+    transition: top 0.5s ease, right 0.5s ease, left 0.5s ease, transform 0.5s ease !important;
+  }
+  
+   
+  .line-1 {
+    top: -10% !important;
+    right: 15% !important;
+    width: 6px !important;  
+    height: 140% !important;
+    transform: rotate(-30deg) !important;
+    background-color: #FF9A9A !important;  
+  }
+  
+   
+  .line-2 {
+    top: 20% !important;
+    left: -5% !important;
+    width: 120% !important;
+    height: 6px !important;  
+    transform: rotate(15deg) !important;
+    background-color: #A9C7FF !important;  
+  }
+  
+   
   #home-text {
     position: absolute !important;
     top: 50% !important;
@@ -217,7 +289,7 @@
     text-align: center !important;
     width: 90% !important;
     max-width: 1000px !important;
-    z-index: 1 !important;
+    z-index: 2 !important;  
   }
   
    

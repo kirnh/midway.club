@@ -1,6 +1,11 @@
 {{ define "main" }}
 <div id="home-fullscreen">
   <div id="home-bg"></div>
+  
+  <!-- Asymmetrical crossing lines -->
+  <div class="line line-1"></div>
+  <div class="line line-2"></div>
+  
   <div id="home-text">
     <h1>The Future of Conversations</h1>
     <p class="tagline">Where Words Meet Understanding</p>
@@ -8,8 +13,11 @@
 </div>
 
 <script>
-  // Script to sync our home page with the theme's dark mode
+  // Script to sync our home page with the theme's dark mode and randomize line positions
   document.addEventListener('DOMContentLoaded', function() {
+    // Track previous theme state
+    let wasDarkMode = false;
+    
     // Initial sync
     syncWithTheme();
     
@@ -39,8 +47,44 @@
           homeContainer.classList.add('theme-light');
           homeContainer.classList.remove('theme-dark');
         }
+        
+        // If theme changed, randomize line positions
+        if (isDarkMode !== wasDarkMode) {
+          randomizeLines();
+          wasDarkMode = isDarkMode;
+        }
       }
     }
+    
+    // Function to randomize line positions
+    function randomizeLines() {
+      const line1 = document.querySelector('.line-1');
+      const line2 = document.querySelector('.line-2');
+      
+      if (line1 && line2) {
+        // Randomize line 1 (vertical line)
+        const top1 = -10 - Math.random() * 10; // -10% to -20%
+        const right1 = Math.random() * 40; // 0% to 40%
+        const angle1 = -20 - Math.random() * 25; // -20deg to -45deg
+        
+        // Randomize line 2 (horizontal line)
+        const top2 = 10 + Math.random() * 30; // 10% to 40%
+        const left2 = -10 - Math.random() * 10; // -10% to -20%
+        const angle2 = 10 + Math.random() * 20; // 10deg to 30deg
+        
+        // Apply new styles
+        line1.style.top = `${top1}%`;
+        line1.style.right = `${right1}%`;
+        line1.style.transform = `rotate(${angle1}deg)`;
+        
+        line2.style.top = `${top2}%`;
+        line2.style.left = `${left2}%`;
+        line2.style.transform = `rotate(${angle2}deg)`;
+      }
+    }
+    
+    // Also randomize on page load
+    randomizeLines();
   });
 </script>
 
@@ -69,6 +113,34 @@
     transition: background-color 0.3s ease !important;
   }
   
+  /* Asymmetrical crossing lines */
+  .line {
+    position: absolute !important;
+    z-index: 1 !important;
+    opacity: 0.5 !important; /* Pastel effect */
+    transition: top 0.5s ease, right 0.5s ease, left 0.5s ease, transform 0.5s ease !important;
+  }
+  
+  /* First line - pastel red, diagonal */
+  .line-1 {
+    top: -10% !important;
+    right: 15% !important;
+    width: 6px !important; /* Thicker line */
+    height: 140% !important;
+    transform: rotate(-30deg) !important;
+    background-color: #FF9A9A !important; /* Pastel red */
+  }
+  
+  /* Second line - pastel blue, diagonal */
+  .line-2 {
+    top: 20% !important;
+    left: -5% !important;
+    width: 120% !important;
+    height: 6px !important; /* Thicker line */
+    transform: rotate(15deg) !important;
+    background-color: #A9C7FF !important; /* Pastel blue */
+  }
+  
   /* Centered text */
   #home-text {
     position: absolute !important;
@@ -78,7 +150,7 @@
     text-align: center !important;
     width: 90% !important;
     max-width: 1000px !important;
-    z-index: 1 !important;
+    z-index: 2 !important; /* Above the lines */
   }
   
   /* Bold heading style with wider letters */
