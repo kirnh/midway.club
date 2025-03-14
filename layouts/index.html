@@ -2,49 +2,71 @@
 <div id="home-fullscreen">
   <div id="home-bg"></div>
   <div id="home-text">
-    <h1>The Future of Conversations - Where Words Meet Understanding.</h1>
+    <h1>The Future of Conversations</h1>
+    <p class="tagline">Where Words Meet Understanding</p>
   </div>
 </div>
 
+<script>
+  // Script to sync our home page with the theme's dark mode
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initial sync
+    syncWithTheme();
+    
+    // Watch for changes in the DOM that might indicate theme changes
+    const observer = new MutationObserver(function(mutations) {
+      syncWithTheme();
+    });
+    
+    // Observe the html or body element for class changes
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    
+    function syncWithTheme() {
+      // Check if the theme is in dark mode
+      const isDarkMode = document.documentElement.classList.contains('dark') || 
+                         document.body.classList.contains('dark') ||
+                         document.documentElement.dataset.theme === 'dark' ||
+                         document.body.dataset.theme === 'dark';
+      
+      // Apply appropriate styles
+      const homeContainer = document.getElementById('home-fullscreen');
+      if (homeContainer) {
+        if (isDarkMode) {
+          homeContainer.classList.add('theme-dark');
+          homeContainer.classList.remove('theme-light');
+        } else {
+          homeContainer.classList.add('theme-light');
+          homeContainer.classList.remove('theme-dark');
+        }
+      }
+    }
+  });
+</script>
+
 <style>
-  /* Reset any theme containers */
-  body, html {
-    overflow-x: hidden !important;
-  }
+  /* Import Montserrat with bold weights */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
   
-  .main, .container, .content, article, .post-single, main {
-    max-width: 100% !important;
-    width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  /* Full screen container */
+  /* Target only the main content area */
   #home-fullscreen {
     position: relative !important;
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100% !important;
+    height: calc(100vh - 80px) !important; /* Adjust based on header height */
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
-    /* Push content down to account for header */
-    margin-top: -80px !important; /* Adjust based on your header height */
-    /* Add padding to account for header */
-    padding-top: 80px !important; /* Should match the negative margin-top */
   }
   
-  /* Background image */
+  /* Background with theme-matching color */
   #home-bg {
-    position: fixed !important;
+    position: absolute !important;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    background-image: url('{{ .Site.BaseURL }}images/home-background.jpg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    filter: brightness(0.7) !important;
-    z-index: -1 !important; /* Behind everything */
+    z-index: 0 !important;
+    transition: background-color 0.3s ease !important;
   }
   
   /* Centered text */
@@ -54,23 +76,101 @@
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     text-align: center !important;
-    color: white !important;
     width: 90% !important;
-    max-width: 800px !important;
+    max-width: 1000px !important;
     z-index: 1 !important;
   }
   
+  /* Bold heading style with wider letters */
   #home-text h1 {
-    font-size: 2.5rem !important;
-    margin: 0 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 3.2rem !important;
+    font-weight: 700 !important;
+    margin: 0 0 0.8rem 0 !important;
     padding: 0 !important;
-    line-height: 1.4 !important;
-    color: white !important;
+    line-height: 1.2 !important;
+    letter-spacing: 2px !important;
+    font-stretch: 105% !important;
+    transition: color 0.3s ease !important;
   }
   
-  @media (min-width: 768px) {
+  /* Bold tagline style with wider letters */
+  #home-text .tagline {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    letter-spacing: 3px !important;
+    font-stretch: 105% !important;
+    transition: color 0.3s ease !important;
+  }
+  
+  /* Light theme styles */
+  .theme-light #home-bg {
+    background-color: #ffffff !important;
+  }
+  
+  .theme-light #home-text h1 {
+    color: #1a1a1a !important;
+  }
+  
+  .theme-light #home-text .tagline {
+    color: #555555 !important;
+  }
+  
+  /* Dark theme styles */
+  .theme-dark #home-bg {
+    background-color: #121212 !important;
+  }
+  
+  .theme-dark #home-text h1 {
+    color: #ffffff !important;
+  }
+  
+  .theme-dark #home-text .tagline {
+    color: #dddddd !important;
+  }
+  
+  /* Make sure the main content area takes up full width */
+  .main, .container, .content, article, .post-single, main {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1200px) {
     #home-text h1 {
-      font-size: 3rem !important;
+      font-size: 2.8rem !important;
+      letter-spacing: 1.8px !important;
+    }
+    #home-text .tagline {
+      font-size: 1.3rem !important;
+      letter-spacing: 2.5px !important;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    #home-text h1 {
+      font-size: 2.4rem !important;
+      letter-spacing: 1.5px !important;
+    }
+    #home-text .tagline {
+      font-size: 1.2rem !important;
+      letter-spacing: 2px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    #home-text h1 {
+      font-size: 2rem !important;
+      letter-spacing: 1px !important;
+    }
+    #home-text .tagline {
+      font-size: 1.1rem !important;
+      letter-spacing: 1.5px !important;
     }
   }
 </style>
