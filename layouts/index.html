@@ -113,32 +113,61 @@
     transition: background-color 0.3s ease !important;
   }
   
-  /* Asymmetrical crossing lines */
+  /* Asymmetrical crossing lines with enhanced glow */
   .line {
     position: absolute !important;
     z-index: 1 !important;
-    opacity: 0.5 !important; /* Pastel effect */
-    transition: top 0.5s ease, right 0.5s ease, left 0.5s ease, transform 0.5s ease !important;
+    opacity: 0.9 !important; /* Increased opacity for stronger presence */
+    transition: top 0.5s ease, right 0.5s ease, left 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease !important;
   }
   
-  /* First line - pastel red, diagonal */
+  /* First line - pastel red with stronger glow, diagonal */
   .line-1 {
     top: -10% !important;
     right: 15% !important;
-    width: 6px !important; /* Thicker line */
+    width: 6px !important;
     height: 140% !important;
     transform: rotate(-30deg) !important;
     background-color: #FF9A9A !important; /* Pastel red */
+    box-shadow: 0 0 25px 8px rgba(255, 154, 154, 0.9), 
+                0 0 40px 12px rgba(255, 100, 100, 0.5) !important; /* Enhanced red glow with dual layers */
+    animation: pulse-red 3s infinite alternate !important;
   }
   
-  /* Second line - pastel blue, diagonal */
+  /* Second line - pastel blue with stronger glow, diagonal */
   .line-2 {
     top: 20% !important;
     left: -5% !important;
     width: 120% !important;
-    height: 6px !important; /* Thicker line */
+    height: 6px !important;
     transform: rotate(15deg) !important;
     background-color: #A9C7FF !important; /* Pastel blue */
+    box-shadow: 0 0 25px 8px rgba(169, 199, 255, 0.9),
+                0 0 40px 12px rgba(100, 150, 255, 0.5) !important; /* Enhanced blue glow with dual layers */
+    animation: pulse-blue 4s infinite alternate !important;
+  }
+  
+  /* Enhanced pulsing animations for the stronger glowing effect */
+  @keyframes pulse-red {
+    0% {
+      box-shadow: 0 0 25px 8px rgba(255, 154, 154, 0.9),
+                  0 0 40px 12px rgba(255, 100, 100, 0.5) !important;
+    }
+    100% {
+      box-shadow: 0 0 35px 12px rgba(255, 154, 154, 0.95),
+                  0 0 60px 20px rgba(255, 100, 100, 0.7) !important;
+    }
+  }
+  
+  @keyframes pulse-blue {
+    0% {
+      box-shadow: 0 0 25px 8px rgba(169, 199, 255, 0.9),
+                  0 0 40px 12px rgba(100, 150, 255, 0.5) !important;
+    }
+    100% {
+      box-shadow: 0 0 35px 12px rgba(169, 199, 255, 0.95),
+                  0 0 60px 20px rgba(100, 150, 255, 0.7) !important;
+    }
   }
   
   /* Centered text */
@@ -164,6 +193,7 @@
     letter-spacing: 2px !important;
     font-stretch: 105% !important;
     transition: color 0.3s ease !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important; /* Subtle text glow */
   }
   
   /* Bold tagline style with wider letters */
@@ -198,6 +228,7 @@
   
   .theme-dark #home-text h1 {
     color: #ffffff !important;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2) !important; /* Enhanced text glow in dark mode */
   }
   
   .theme-dark #home-text .tagline {
@@ -233,6 +264,12 @@
       font-size: 1.2rem !important;
       letter-spacing: 2px !important;
     }
+    
+    /* Adjust glow for medium screens but keep it strong */
+    .line-1, .line-2 {
+      box-shadow: 0 0 20px 6px rgba(255, 154, 154, 0.8),
+                  0 0 30px 10px rgba(255, 100, 100, 0.4) !important;
+    }
   }
   
   @media (max-width: 768px) {
@@ -243,6 +280,12 @@
     #home-text .tagline {
       font-size: 1.1rem !important;
       letter-spacing: 1.5px !important;
+    }
+    
+    /* Still strong glow but slightly reduced for mobile */
+    .line-1, .line-2 {
+      box-shadow: 0 0 15px 5px rgba(255, 154, 154, 0.8),
+                  0 0 25px 8px rgba(255, 100, 100, 0.4) !important;
     }
   }
 </style>
