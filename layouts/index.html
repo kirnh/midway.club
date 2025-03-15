@@ -266,9 +266,14 @@
     }
     
     /* Adjust glow for medium screens but keep it strong */
-    .line-1, .line-2 {
+    .line-1 {
       box-shadow: 0 0 20px 6px rgba(255, 154, 154, 0.8),
                   0 0 30px 10px rgba(255, 100, 100, 0.4) !important;
+    }
+    
+    .line-2 {
+      box-shadow: 0 0 20px 6px rgba(169, 199, 255, 0.8),
+                  0 0 30px 10px rgba(100, 150, 255, 0.4) !important;
     }
   }
   
@@ -282,10 +287,15 @@
       letter-spacing: 1.5px !important;
     }
     
-    /* Still strong glow but slightly reduced for mobile */
-    .line-1, .line-2 {
+    /* Still strong glow but slightly reduced for mobile - with correct colors */
+    .line-1 {
       box-shadow: 0 0 15px 5px rgba(255, 154, 154, 0.8),
                   0 0 25px 8px rgba(255, 100, 100, 0.4) !important;
+    }
+    
+    .line-2 {
+      box-shadow: 0 0 15px 5px rgba(169, 199, 255, 0.8),
+                  0 0 25px 8px rgba(100, 150, 255, 0.4) !important;
     }
   }
 </style>
