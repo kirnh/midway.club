@@ -21,6 +21,18 @@
     // Initial randomization
     randomizeLines();
     
+    // Add click/tap event to move lines
+    homeContainer.addEventListener('click', function() {
+      randomizeLines();
+    });
+    
+    // Also add touch event for mobile
+    homeContainer.addEventListener('touchend', function(e) {
+      // Prevent default to avoid double-triggering on some devices
+      e.preventDefault();
+      randomizeLines();
+    });
+    
     // Watch for theme changes from the theme itself
     const observer = new MutationObserver(function(mutations) {
       for (const mutation of mutations) {
@@ -100,6 +112,7 @@
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
+    cursor: pointer !important; /* Add pointer cursor to indicate interactivity */
   }
   
   /* Background with theme-matching color */
@@ -180,6 +193,7 @@
     width: 90% !important;
     max-width: 1000px !important;
     z-index: 2 !important; /* Above the lines */
+    pointer-events: none !important; /* Allow clicks to pass through to the container */
   }
   
   /* Bold heading style with wider letters */

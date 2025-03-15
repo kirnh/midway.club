@@ -161,6 +161,18 @@
     randomizeLines();
     
     
+    homeContainer.addEventListener('click', function() {
+      randomizeLines();
+    });
+    
+    
+    homeContainer.addEventListener('touchend', function(e) {
+      
+      e.preventDefault();
+      randomizeLines();
+    });
+    
+    
     const observer = new MutationObserver(function(mutations) {
       for (const mutation of mutations) {
         if (mutation.type === 'attributes' && 
@@ -239,6 +251,7 @@
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
+    cursor: pointer !important;  
   }
   
    
@@ -319,6 +332,7 @@
     width: 90% !important;
     max-width: 1000px !important;
     z-index: 2 !important;  
+    pointer-events: none !important;  
   }
   
    
