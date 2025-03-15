@@ -30,11 +30,11 @@ Midway is a smart, AI-enhanced conversation microphone designed to improve commu
 
 ## How Midway Helps
 
-- 💬 Resolve Hidden Conflicts – Detect tension points before they escalate and foster clarity in conversations.
-- 🎙️ Enhance Understanding – Get personalized feedback on tone, speaking balance, and engagement levels.
-- ❤️ Strengthen Emotional Bonds – Develop deeper empathy and awareness in your relationships.
-- 📊 AI-Powered Insights – Learn what works and what doesn’t in your conversations to create healthier communication habits.
-- 🌱 Personal Growth, Together – Midway encourages mindful communication, making each interaction more meaningful and fulfilling.
+- Resolve Hidden Conflicts – Detect tension points before they escalate and foster clarity in conversations.
+- Enhance Understanding – Get personalized feedback on tone, speaking balance, and engagement levels.
+- Strengthen Emotional Bonds – Develop deeper empathy and awareness in your relationships.
+- AI-Powered Insights – Learn what works and what doesn’t in your conversations to create healthier communication habits.
+- Personal Growth, Together – Midway encourages mindful communication, making each interaction more meaningful and fulfilling.
 
 ---
 
@@ -42,10 +42,10 @@ Midway is a smart, AI-enhanced conversation microphone designed to improve commu
 
 By helping you speak with intention, listen with empathy, and bridge conversational gaps, Midway transforms not just how you talk—but how you connect. The result?
 
-- ✅ More fulfilling relationships
-- ✅ Less stress and frustration in communication
-- ✅ Deeper understanding and emotional safety
-- ✅ A stronger, healthier, and happier life
+- More fulfilling relationships
+- Less stress and frustration in communication
+- Deeper understanding and emotional safety
+- A stronger, healthier, and happier life
 
 ---
 
