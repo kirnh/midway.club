@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Midway</title><link>https://www.midway.club/posts/</link><description>Recent content in Posts on Midway</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 16 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.midway.club/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>A Native Swift iPad App for Audio Visualization</title><link>https://www.midway.club/posts/ipad-audio-visualization/</link><pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/ipad-audio-visualization/</guid><description>&lt;p>Creating a &lt;strong>minimal, aesthetic audio visualization app&lt;/strong> for iPad requires &lt;strong>native performance and a smooth user experience&lt;/strong>. In this guide, we will build &lt;strong>Midway&lt;/strong>, a &lt;strong>Swift-based&lt;/strong> iPad app that plays and visualizes an audio file in an elegant way.&lt;/p>
-&lt;p>We&amp;rsquo;ll go through the &lt;strong>entire process step by step&lt;/strong>, from &lt;strong>creating the app in Xcode&lt;/strong> to &lt;strong>deploying and running it on a real iPad&lt;/strong> for development.&lt;/p>
-&lt;p>Let’s get started! 🚀&lt;/p>
-&lt;hr>
-&lt;h2 id="-step-1-install-xcode">&lt;strong>📌 Step 1: Install Xcode&lt;/strong>&lt;/h2>
-&lt;p>Before creating the app, install &lt;strong>Xcode&lt;/strong>, Apple’s official IDE for iOS and iPad development.&lt;/p></description></item><item><title>Persistent Bluetooth Connection Between Raspberry Pi and iPad</title><link>https://www.midway.club/posts/raspberrypi-ipad-bluetooth/</link><pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/raspberrypi-ipad-bluetooth/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Midway</title><link>https://www.midway.club/posts/</link><description>Recent content in Posts on Midway</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 16 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.midway.club/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Building a Real-Time Audio Visualizer in SwiftUI</title><link>https://www.midway.club/posts/ipad-audio-visualization/</link><pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/ipad-audio-visualization/</guid><description>&lt;p>&lt;em>A step-by-step guide to creating a radial audio visualizer that responds to microphone input&lt;/em>&lt;/p>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>In this tutorial, we&amp;rsquo;ll build &amp;ldquo;AudioWave&amp;rdquo; - a SwiftUI app that creates a beautiful radial visualization of audio captured from the device&amp;rsquo;s microphone. This project demonstrates several important iOS development concepts:&lt;/p>
+&lt;ul>
+&lt;li>Working with microphone permissions and audio recording&lt;/li>
+&lt;li>Processing real-time audio data&lt;/li>
+&lt;li>Creating custom visualizations with SwiftUI&lt;/li>
+&lt;li>Handling iOS permissions properly&lt;/li>
+&lt;/ul>
+&lt;p>Let&amp;rsquo;s dive in and see how we can bring audio to life visually!&lt;/p></description></item><item><title>Persistent Bluetooth Connection Between Raspberry Pi and iPad</title><link>https://www.midway.club/posts/raspberrypi-ipad-bluetooth/</link><pubDate>Sat, 15 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/raspberrypi-ipad-bluetooth/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>This guide walks you through the process of:&lt;/p>
 &lt;ol>
 &lt;li>&lt;strong>One-time pairing of the Raspberry Pi with the iPad.&lt;/strong>&lt;/li>
@@ -13,7 +17,20 @@
 &lt;p>With this setup, the Raspberry Pi will continuously monitor the Bluetooth connection and automatically reconnect to the iPad if disconnected.&lt;/p>
 &lt;hr>
 &lt;h2 id="1-one-time-bluetooth-pairing">&lt;strong>1. One-Time Bluetooth Pairing&lt;/strong>&lt;/h2>
-&lt;p>Before setting up the automatic connection, you need to &lt;strong>pair your iPad with the Raspberry Pi manually&lt;/strong>.&lt;/p></description></item><item><title>Deploying Hugo site to GitHub Pages</title><link>https://www.midway.club/posts/deploy-hugo-site-to-github-pages/</link><pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/deploy-hugo-site-to-github-pages/</guid><description>&lt;p>&lt;strong>🚀 Step 1: Push Your Hugo Site to GitHub&lt;/strong>&lt;/p>
+&lt;p>Before setting up the automatic connection, you need to &lt;strong>pair your iPad with the Raspberry Pi manually&lt;/strong>.&lt;/p></description></item><item><title>Raspberry Pi Headless Setup Guide</title><link>https://www.midway.club/posts/raspberrypi-setup/</link><pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/raspberrypi-setup/</guid><description>&lt;h1 id="raspberry-pi-headless-setup-guide">Raspberry Pi Headless Setup Guide&lt;/h1>
+&lt;p>Setting up a Raspberry Pi without a monitor, keyboard, or mouse (headless setup) is a convenient way to configure your Pi for remote use. This guide will walk you through the entire process, from flashing the OS to connecting via SSH and setting up Wi-Fi.&lt;/p>
+&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
+&lt;ul>
+&lt;li>A Raspberry Pi (any model, preferably with built-in Wi-Fi like the Raspberry Pi 4, 3B+)&lt;/li>
+&lt;li>A microSD card (16GB or larger, Class 10 recommended)&lt;/li>
+&lt;li>A microSD card reader&lt;/li>
+&lt;li>A power adapter suitable for your Raspberry Pi&lt;/li>
+&lt;li>A computer (Windows, macOS, or Linux)&lt;/li>
+&lt;li>A stable internet connection&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="step-1-download-raspberry-pi-os">Step 1: Download Raspberry Pi OS&lt;/h2>
+&lt;p>Raspberry Pi OS (formerly Raspbian) is the recommended operating system. You can download it from the official site:&lt;/p></description></item><item><title>Deploying Hugo site to GitHub Pages</title><link>https://www.midway.club/posts/deploy-hugo-site-to-github-pages/</link><pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/deploy-hugo-site-to-github-pages/</guid><description>&lt;p>&lt;strong>🚀 Step 1: Push Your Hugo Site to GitHub&lt;/strong>&lt;/p>
 &lt;p>&lt;strong>1.1: Create a GitHub Repository&lt;/strong>&lt;/p>
 &lt;p>​	1.	Go to &lt;a href="https://github.com/">GitHub&lt;/a> and create a &lt;strong>new repository&lt;/strong> named midway-club.&lt;/p>
 &lt;p>​	2.	&lt;strong>Do not&lt;/strong> add a README, .gitignore, or license (we will handle this manually).&lt;/p>
@@ -48,17 +65,4 @@ git push -u origin main
 cd dev-docs
 &lt;/code>&lt;/pre>&lt;p>&lt;strong>1.3: Choose a Theme&lt;/strong>&lt;/p>
 &lt;p>Hugo themes define the design of your site. You can pick one from &lt;a href="https://themes.gohugo.io/">https://themes.gohugo.io/&lt;/a>.&lt;/p>
-&lt;p>For a simple, aesthetic theme, let’s use &lt;strong>Paper&lt;/strong>:&lt;/p></description></item><item><title>Raspberry Pi Headless Setup Guide</title><link>https://www.midway.club/posts/raspberrypi-setup/</link><pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/raspberrypi-setup/</guid><description>&lt;h1 id="raspberry-pi-headless-setup-guide">Raspberry Pi Headless Setup Guide&lt;/h1>
-&lt;p>Setting up a Raspberry Pi without a monitor, keyboard, or mouse (headless setup) is a convenient way to configure your Pi for remote use. This guide will walk you through the entire process, from flashing the OS to connecting via SSH and setting up Wi-Fi.&lt;/p>
-&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
-&lt;ul>
-&lt;li>A Raspberry Pi (any model, preferably with built-in Wi-Fi like the Raspberry Pi 4, 3B+)&lt;/li>
-&lt;li>A microSD card (16GB or larger, Class 10 recommended)&lt;/li>
-&lt;li>A microSD card reader&lt;/li>
-&lt;li>A power adapter suitable for your Raspberry Pi&lt;/li>
-&lt;li>A computer (Windows, macOS, or Linux)&lt;/li>
-&lt;li>A stable internet connection&lt;/li>
-&lt;/ul>
-&lt;hr>
-&lt;h2 id="step-1-download-raspberry-pi-os">Step 1: Download Raspberry Pi OS&lt;/h2>
-&lt;p>Raspberry Pi OS (formerly Raspbian) is the recommended operating system. You can download it from the official site:&lt;/p></description></item></channel></rss>
+&lt;p>For a simple, aesthetic theme, let’s use &lt;strong>Paper&lt;/strong>:&lt;/p></description></item></channel></rss>
