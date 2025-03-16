@@ -6,21 +6,21 @@
     <description>Recent content in Posts on Midway</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Native Swift iPad App for Audio Visualization</title>
+      <link>http://localhost:1313/posts/ipad-audio-visualization/</link>
+      <pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ipad-audio-visualization/</guid>
+      <description>&lt;p&gt;Creating a &lt;strong&gt;minimal, aesthetic audio visualization app&lt;/strong&gt; for iPad requires &lt;strong&gt;native performance and a smooth user experience&lt;/strong&gt;. In this guide, we will build &lt;strong&gt;Midway&lt;/strong&gt;, a &lt;strong&gt;Swift-based&lt;/strong&gt; iPad app that plays and visualizes an audio file in an elegant way.&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;ll go through the &lt;strong&gt;entire process step by step&lt;/strong&gt;, from &lt;strong&gt;creating the app in Xcode&lt;/strong&gt; to &lt;strong&gt;deploying and running it on a real iPad&lt;/strong&gt; for development.&lt;/p&gt;&#xA;&lt;p&gt;Let’s get started! 🚀&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-step-1-install-xcode&#34;&gt;&lt;strong&gt;📌 Step 1: Install Xcode&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Before creating the app, install &lt;strong&gt;Xcode&lt;/strong&gt;, Apple’s official IDE for iOS and iPad development.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Persistent Bluetooth Connection Between Raspberry Pi and iPad</title>
       <link>http://localhost:1313/posts/raspberrypi-ipad-bluetooth/</link>
       <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/raspberrypi-ipad-bluetooth/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;This guide walks you through the process of:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;One-time pairing of the Raspberry Pi with the iPad.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Setting up a Bash script to maintain a persistent Bluetooth connection.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Running the script automatically on boot using &lt;code&gt;systemd&lt;/code&gt;.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;With this setup, the Raspberry Pi will continuously monitor the Bluetooth connection and automatically reconnect to the iPad if disconnected.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-one-time-bluetooth-pairing&#34;&gt;&lt;strong&gt;1. One-Time Bluetooth Pairing&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Before setting up the automatic connection, you need to &lt;strong&gt;pair your iPad with the Raspberry Pi manually&lt;/strong&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Streaming Audio from Raspberry Pi to iPad via Bluetooth</title>
-      <link>http://localhost:1313/posts/stream-audio-pi-ipad/</link>
-      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/stream-audio-pi-ipad/</guid>
-      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;This guide explains how to:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Capture audio from a microphone connected to the Raspberry Pi.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Stream the audio data to the iPad over Bluetooth.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Ensure the audio stream automatically resumes when the Bluetooth connection is re-established.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;This setup guarantees a &lt;strong&gt;continuous, automated audio stream&lt;/strong&gt; from the Pi to the iPad, even if the Bluetooth connection is temporarily lost.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-capturing-and-streaming-audio-to-the-ipad&#34;&gt;&lt;strong&gt;1. Capturing and Streaming Audio to the iPad&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Since Bluetooth is already connected, we need to &lt;strong&gt;capture and stream microphone audio&lt;/strong&gt; while ensuring that the stream resumes automatically if the connection is lost.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Deploying Hugo site to GitHub Pages</title>
