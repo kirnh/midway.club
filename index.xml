@@ -1,4 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introducing Midway! on Midway</title><link>https://www.midway.club/</link><description>Recent content in Introducing Midway! on Midway</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 14 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.midway.club/index.xml" rel="self" type="application/rss+xml"/><item><title>Persistent Bluetooth Connection Between Raspberry Pi and iPad</title><link>https://www.midway.club/posts/raspberrypi-ipad-bluetooth/</link><pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/raspberrypi-ipad-bluetooth/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introducing Midway! on Midway</title><link>https://www.midway.club/</link><description>Recent content in Introducing Midway! on Midway</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 16 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.midway.club/index.xml" rel="self" type="application/rss+xml"/><item><title>A Native Swift iPad App for Audio Visualization</title><link>https://www.midway.club/posts/ipad-audio-visualization/</link><pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/ipad-audio-visualization/</guid><description>&lt;p>Creating a &lt;strong>minimal, aesthetic audio visualization app&lt;/strong> for iPad requires &lt;strong>native performance and a smooth user experience&lt;/strong>. In this guide, we will build &lt;strong>Midway&lt;/strong>, a &lt;strong>Swift-based&lt;/strong> iPad app that plays and visualizes an audio file in an elegant way.&lt;/p>
+&lt;p>We&amp;rsquo;ll go through the &lt;strong>entire process step by step&lt;/strong>, from &lt;strong>creating the app in Xcode&lt;/strong> to &lt;strong>deploying and running it on a real iPad&lt;/strong> for development.&lt;/p>
+&lt;p>Let’s get started! 🚀&lt;/p>
+&lt;hr>
+&lt;h2 id="-step-1-install-xcode">&lt;strong>📌 Step 1: Install Xcode&lt;/strong>&lt;/h2>
+&lt;p>Before creating the app, install &lt;strong>Xcode&lt;/strong>, Apple’s official IDE for iOS and iPad development.&lt;/p></description></item><item><title>Persistent Bluetooth Connection Between Raspberry Pi and iPad</title><link>https://www.midway.club/posts/raspberrypi-ipad-bluetooth/</link><pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/raspberrypi-ipad-bluetooth/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>This guide walks you through the process of:&lt;/p>
 &lt;ol>
 &lt;li>&lt;strong>One-time pairing of the Raspberry Pi with the iPad.&lt;/strong>&lt;/li>
@@ -8,17 +13,7 @@
 &lt;p>With this setup, the Raspberry Pi will continuously monitor the Bluetooth connection and automatically reconnect to the iPad if disconnected.&lt;/p>
 &lt;hr>
 &lt;h2 id="1-one-time-bluetooth-pairing">&lt;strong>1. One-Time Bluetooth Pairing&lt;/strong>&lt;/h2>
-&lt;p>Before setting up the automatic connection, you need to &lt;strong>pair your iPad with the Raspberry Pi manually&lt;/strong>.&lt;/p></description></item><item><title>Streaming Audio from Raspberry Pi to iPad via Bluetooth</title><link>https://www.midway.club/posts/stream-audio-pi-ipad/</link><pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/stream-audio-pi-ipad/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
-&lt;p>This guide explains how to:&lt;/p>
-&lt;ol>
-&lt;li>&lt;strong>Capture audio from a microphone connected to the Raspberry Pi.&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>Stream the audio data to the iPad over Bluetooth.&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>Ensure the audio stream automatically resumes when the Bluetooth connection is re-established.&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;p>This setup guarantees a &lt;strong>continuous, automated audio stream&lt;/strong> from the Pi to the iPad, even if the Bluetooth connection is temporarily lost.&lt;/p>
-&lt;hr>
-&lt;h2 id="1-capturing-and-streaming-audio-to-the-ipad">&lt;strong>1. Capturing and Streaming Audio to the iPad&lt;/strong>&lt;/h2>
-&lt;p>Since Bluetooth is already connected, we need to &lt;strong>capture and stream microphone audio&lt;/strong> while ensuring that the stream resumes automatically if the connection is lost.&lt;/p></description></item><item><title>Deploying Hugo site to GitHub Pages</title><link>https://www.midway.club/posts/deploy-hugo-site-to-github-pages/</link><pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/deploy-hugo-site-to-github-pages/</guid><description>&lt;p>&lt;strong>🚀 Step 1: Push Your Hugo Site to GitHub&lt;/strong>&lt;/p>
+&lt;p>Before setting up the automatic connection, you need to &lt;strong>pair your iPad with the Raspberry Pi manually&lt;/strong>.&lt;/p></description></item><item><title>Deploying Hugo site to GitHub Pages</title><link>https://www.midway.club/posts/deploy-hugo-site-to-github-pages/</link><pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/deploy-hugo-site-to-github-pages/</guid><description>&lt;p>&lt;strong>🚀 Step 1: Push Your Hugo Site to GitHub&lt;/strong>&lt;/p>
 &lt;p>&lt;strong>1.1: Create a GitHub Repository&lt;/strong>&lt;/p>
 &lt;p>​	1.	Go to &lt;a href="https://github.com/">GitHub&lt;/a> and create a &lt;strong>new repository&lt;/strong> named midway-club.&lt;/p>
 &lt;p>​	2.	&lt;strong>Do not&lt;/strong> add a README, .gitignore, or license (we will handle this manually).&lt;/p>

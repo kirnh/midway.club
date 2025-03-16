@@ -1,0 +1,117 @@
+<!doctype html><html class="not-ready lg:text-base" style=--bg:#faf8f1 lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>A Native Swift iPad App for Audio Visualization-Midway</title>
+<meta name=theme-color><meta name=description content="Creating a minimal, aesthetic audio visualization app for iPad requires native performance and a smooth user experience. In this guide, we will build Midway, a Swift-based iPad app that plays and visualizes an audio file in an elegant way.
+We&rsquo;ll go through the entire process step by step, from creating the app in Xcode to deploying and running it on a real iPad for development.
+Let’s get started! 🚀
+
+📌 Step 1: Install Xcode
+Before creating the app, install Xcode, Apple’s official IDE for iOS and iPad development."><meta name=author content="Midway"><link rel="preload stylesheet" as=style href=https://www.midway.club/main.min.css><link rel=preload as=image href=https://www.midway.club/theme.png><script defer src=https://www.midway.club/highlight.min.js onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://www.midway.club/favicon.ico><link rel=apple-touch-icon href=https://www.midway.club/apple-touch-icon.png><meta name=generator content="Hugo 0.145.0"><meta itemprop=name content="A Native Swift iPad App for Audio Visualization"><meta itemprop=description content="Creating a minimal, aesthetic audio visualization app for iPad requires native performance and a smooth user experience. In this guide, we will build Midway, a Swift-based iPad app that plays and visualizes an audio file in an elegant way.
+We’ll go through the entire process step by step, from creating the app in Xcode to deploying and running it on a real iPad for development.
+Let’s get started! 🚀
+📌 Step 1: Install Xcode Before creating the app, install Xcode, Apple’s official IDE for iOS and iPad development."><meta itemprop=datePublished content="2025-03-16T00:00:00+00:00"><meta itemprop=dateModified content="2025-03-16T00:00:00+00:00"><meta itemprop=wordCount content="640"><meta property="og:url" content="https://www.midway.club/posts/ipad-audio-visualization/"><meta property="og:site_name" content="Midway"><meta property="og:title" content="A Native Swift iPad App for Audio Visualization"><meta property="og:description" content="Creating a minimal, aesthetic audio visualization app for iPad requires native performance and a smooth user experience. In this guide, we will build Midway, a Swift-based iPad app that plays and visualizes an audio file in an elegant way.
+We’ll go through the entire process step by step, from creating the app in Xcode to deploying and running it on a real iPad for development.
+Let’s get started! 🚀
+📌 Step 1: Install Xcode Before creating the app, install Xcode, Apple’s official IDE for iOS and iPad development."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-03-16T00:00:00+00:00"><meta property="article:modified_time" content="2025-03-16T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="A Native Swift iPad App for Audio Visualization"><meta name=twitter:description content="Creating a minimal, aesthetic audio visualization app for iPad requires native performance and a smooth user experience. In this guide, we will build Midway, a Swift-based iPad app that plays and visualizes an audio file in an elegant way.
+We’ll go through the entire process step by step, from creating the app in Xcode to deploying and running it on a real iPad for development.
+Let’s get started! 🚀
+📌 Step 1: Install Xcode Before creating the app, install Xcode, Apple’s official IDE for iOS and iPad development."><link rel=canonical href=https://www.midway.club/posts/ipad-audio-visualization/></head><body class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"><header class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"><div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto"><a class="-translate-y-[1px] text-2xl font-medium" href=https://www.midway.club/>Midway</a><div class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]" role=button aria-label=Dark></div></div><div class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8" role=button aria-label=Menu></div><script>const htmlClass=document.documentElement.classList;setTimeout(()=>{htmlClass.remove("not-ready")},10);const btnMenu=document.querySelector(".btn-menu");btnMenu.addEventListener("click",()=>{htmlClass.toggle("open")});const metaTheme=document.querySelector('meta[name="theme-color"]'),lightBg="#faf8f1".replace(/"/g,""),setDark=e=>{metaTheme.setAttribute("content",e?"#000":lightBg),htmlClass[e?"add":"remove"]("dark"),localStorage.setItem("dark",e)},darkScheme=window.matchMedia("(prefers-color-scheme: dark)");if(htmlClass.contains("dark"))setDark(!0);else{const e=localStorage.getItem("dark");setDark(e?e==="true":darkScheme.matches)}darkScheme.addEventListener("change",e=>{setDark(e.matches)});const btnDark=document.querySelector(".btn-dark");btnDark.addEventListener("click",()=>{setDark(localStorage.getItem("dark")!=="true")})</script><div class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"><nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=/posts/>Blogs</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=/about/>About</a></nav></div></header><main class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"><article><header class=mb-14><h1 class="my-0! pb-2.5">A Native Swift iPad App for Audio Visualization</h1><div class="text-xs antialiased opacity-60"><time>Mar 16, 2025</time></div></header><section><p>Creating a <strong>minimal, aesthetic audio visualization app</strong> for iPad requires <strong>native performance and a smooth user experience</strong>. In this guide, we will build <strong>Midway</strong>, a <strong>Swift-based</strong> iPad app that plays and visualizes an audio file in an elegant way.</p><p>We&rsquo;ll go through the <strong>entire process step by step</strong>, from <strong>creating the app in Xcode</strong> to <strong>deploying and running it on a real iPad</strong> for development.</p><p>Let’s get started! 🚀</p><hr><h2 id=-step-1-install-xcode><strong>📌 Step 1: Install Xcode</strong></h2><p>Before creating the app, install <strong>Xcode</strong>, Apple’s official IDE for iOS and iPad development.</p><ol><li>Download <strong>Xcode</strong> from the <strong>Mac App Store</strong>.</li><li>Open Xcode and go to <strong>Preferences (<code>Cmd + ,</code>)</strong>.</li><li>In the <strong>Locations</strong> tab, set the <strong>Command Line Tools</strong> to the latest Xcode version.</li></ol><hr><h2 id=-step-2-create-a-new-swift-app-in-xcode><strong>📌 Step 2: Create a New Swift App in Xcode</strong></h2><ol><li>Open <strong>Xcode</strong> and click <strong>&ldquo;Create a new Xcode project.&rdquo;</strong></li><li>Choose <strong>App (iOS)</strong> and click <strong>Next</strong>.</li><li>Configure the project:<ul><li><strong>Product Name:</strong> <code>Midway</code></li><li><strong>Team:</strong> Select your Apple ID for signing.</li><li><strong>Organization Identifier:</strong> <code>com.yourname.midway</code></li><li><strong>Language:</strong> <code>Swift</code></li><li><strong>Interface:</strong> <code>SwiftUI</code></li><li><strong>Device:</strong> <code>iPad</code></li></ul></li><li>Click <strong>Next</strong>, choose a folder, and click <strong>Create</strong>.</li></ol><h3 id=set-the-deployment-target-to-ipad><strong>Set the Deployment Target to iPad</strong></h3><ol><li>In Xcode, go to <strong>TARGETS → Midway → General</strong>.</li><li>Under <strong>Deployment Info</strong>, set:<ul><li><strong>Device:</strong> <code>iPad</code></li><li><strong>iOS Target:</strong> <code>15.0</code> or higher.</li></ul></li></ol><hr><h2 id=-step-3-connect-your-ipad-for-development><strong>📌 Step 3: Connect Your iPad for Development</strong></h2><p>To run the app on a real iPad, follow these steps:</p><ol><li><strong>Connect your iPad to your Mac via USB.</strong></li><li>Open <strong>Xcode</strong> → <strong>Window → Devices & Simulators (<code>Cmd + Shift + 2</code>)</strong>.</li><li>Select your <strong>iPad</strong> from the <strong>Connected Devices</strong> list.</li><li>If prompted, tap <strong>Trust This Computer</strong> on your iPad and enter your passcode.</li><li>Enable <strong>Developer Mode</strong> when prompted.</li></ol><hr><h2 id=-step-4-build-the-minimalist-ui><strong>📌 Step 4: Build the Minimalist UI</strong></h2><p>Now, we’ll create a <strong>dark-themed, minimal UI</strong> using SwiftUI.</p><h3 id=open><strong>Open <code>ContentView.swift</code></strong></h3><p>Replace the default code with:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>SwiftUI</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>ContentView</span>: View {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> body: some View {
+</span></span><span style=display:flex><span>        ZStack {
+</span></span><span style=display:flex><span>            Color.black.edgesIgnoringSafeArea(.all)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            VStack {
+</span></span><span style=display:flex><span>                Text(<span style=color:#e6db74>&#34;Midway Audio Visualizer&#34;</span>)
+</span></span><span style=display:flex><span>                    .font(.title)
+</span></span><span style=display:flex><span>                    .foregroundColor(.white)
+</span></span><span style=display:flex><span>                    .padding(.top, <span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                Spacer()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                Text(<span style=color:#e6db74>&#34;Select an Audio File&#34;</span>)
+</span></span><span style=display:flex><span>                    .foregroundColor(.gray)
+</span></span><span style=display:flex><span>                    .padding()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                Spacer()
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>ContentView_Previews</span>: PreviewProvider {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>var</span> previews: some View {
+</span></span><span style=display:flex><span>        ContentView()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=run-the-app-on-your-ipad><strong>Run the App on Your iPad</strong></h3><ol><li><strong>Plug in your iPad</strong>.</li><li>In Xcode, select your iPad as the target (top left dropdown).</li><li>Click <strong>Run (<code>▶️</code>)</strong>.</li></ol><hr><h2 id=-step-5-add-audio-file-support><strong>📌 Step 5: Add Audio File Support</strong></h2><p>We’ll now allow users to <strong>import an audio file</strong> and <strong>play it</strong>.</p><h3 id=add-an-audio-file-to-the-app-bundle><strong>Add an Audio File to the App Bundle</strong></h3><ol><li>Drag an <code>MP3</code> or <code>WAV</code> file into Xcode under <code>Assets.xcassets</code>.</li><li>Name it <code>sample_audio.mp3</code>.</li></ol><h3 id=modify><strong>Modify <code>ContentView.swift</code> to Play Audio</strong></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>SwiftUI</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>AVFoundation</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>ContentView</span>: View {
+</span></span><span style=display:flex><span>    @State <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> audioPlayer: AVAudioPlayer?
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> body: some View {
+</span></span><span style=display:flex><span>        ZStack {
+</span></span><span style=display:flex><span>            Color.black.edgesIgnoringSafeArea(.all)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            VStack {
+</span></span><span style=display:flex><span>                Text(<span style=color:#e6db74>&#34;Midway Audio Visualizer&#34;</span>)
+</span></span><span style=display:flex><span>                    .font(.title)
+</span></span><span style=display:flex><span>                    .foregroundColor(.white)
+</span></span><span style=display:flex><span>                    .padding(.top, <span style=color:#ae81ff>50</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                Spacer()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                Button(action: playAudio) {
+</span></span><span style=display:flex><span>                    Text(<span style=color:#e6db74>&#34;▶️ Play Audio&#34;</span>)
+</span></span><span style=display:flex><span>                        .font(.title2)
+</span></span><span style=display:flex><span>                        .foregroundColor(.white)
+</span></span><span style=display:flex><span>                        .padding()
+</span></span><span style=display:flex><span>                        .background(Color.blue)
+</span></span><span style=display:flex><span>                        .cornerRadius(<span style=color:#ae81ff>10</span>)
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                Spacer()
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>playAudio</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>guard</span> <span style=color:#66d9ef>let</span> url = Bundle.main.url(forResource: <span style=color:#e6db74>&#34;sample_audio&#34;</span>, withExtension: <span style=color:#e6db74>&#34;mp3&#34;</span>) <span style=color:#66d9ef>else</span> { <span style=color:#66d9ef>return</span> }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>do</span> {
+</span></span><span style=display:flex><span>            audioPlayer = <span style=color:#66d9ef>try</span> AVAudioPlayer(contentsOf: url)
+</span></span><span style=display:flex><span>            audioPlayer?.play()
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> {
+</span></span><span style=display:flex><span>            print(<span style=color:#e6db74>&#34;Error loading audio file: </span><span style=color:#e6db74>\(</span>error<span style=color:#e6db74>)</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=-step-6-implement-minimalist-audio-visualization><strong>📌 Step 6: Implement Minimalist Audio Visualization</strong></h2><p>To visualize audio, we need a <strong>waveform</strong>.</p><h3 id=create-a-waveform-view><strong>Create a Waveform View</strong></h3><p>Add this new SwiftUI view:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>SwiftUI</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>WaveformView</span>: View {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> amplitudes: [CGFloat]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> body: some View {
+</span></span><span style=display:flex><span>        GeometryReader { geometry <span style=color:#66d9ef>in</span>
+</span></span><span style=display:flex><span>            Path { path <span style=color:#66d9ef>in</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>let</span> width = geometry.size.width
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>let</span> height = geometry.size.height
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>let</span> step = width <span style=color:#f92672>/</span> CGFloat(amplitudes.count)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> i <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>0.</span>.&lt;amplitudes.count {
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>let</span> x = step <span style=color:#f92672>*</span> CGFloat(i)
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>let</span> y = height <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> amplitudes[i] <span style=color:#f92672>*</span> height <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> i == <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>                        path.move(to: CGPoint(x: x, y: y))
+</span></span><span style=display:flex><span>                    } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                        path.addLine(to: CGPoint(x: x, y: y))
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            .stroke(Color.blue, lineWidth: <span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=-next-steps><strong>💪 Next Steps</strong></h2><p>🎭 <strong>Enhance Aesthetics</strong> (Smooth Animations, Particle Effects)<br>🎵 <strong>Live Audio Processing</strong> (Real-Time Microphone Input)<br>📲 <strong>Deploy the App to the App Store</strong></p><p>This Swift iPad app now has a <strong>minimal, elegant</strong> <strong>audio visualizer</strong>! 🚀 Let me know if you need improvements. 🎶</p></section><nav class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"><a class="justify-end pl-3 ltr:ml-auto rtl:mr-auto" href=https://www.midway.club/posts/raspberrypi-ipad-bluetooth/><span>Persistent Bluetooth Connection Between Raspberry Pi and iPad</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a></nav></article></main><footer class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"><div class=mr-auto>&copy;2025<a class=link href=https://www.midway.club/>Midway</a></div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>powered by hugo️️</a>️
+<a class=link href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>hugo-paper</a></footer></body></html>
