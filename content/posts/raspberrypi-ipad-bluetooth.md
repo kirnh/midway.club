@@ -1,5 +1,5 @@
 ---
-Date: 2025-03-14
+Date: 2025-03-15
 title: Persistent Bluetooth Connection Between Raspberry Pi and iPad
 ---
 

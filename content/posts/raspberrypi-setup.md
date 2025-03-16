@@ -1,5 +1,5 @@
 ---
-Date: 2025-03-13
+Date: 2025-03-14
 Title: Raspberry Pi Headless Setup Guide
 ---
 

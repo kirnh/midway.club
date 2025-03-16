@@ -20,17 +20,21 @@
   />
 
   
-  <title>A Native Swift iPad App for Audio Visualization-Midway</title>
+  <title>Building a Real-Time Audio Visualizer in SwiftUI-Midway</title>
 
   
   <meta name="theme-color" />
 
-  <meta name="description" content="Creating a minimal, aesthetic audio visualization app for iPad requires native performance and a smooth user experience. In this guide, we will build Midway, a Swift-based iPad app that plays and visualizes an audio file in an elegant way.
-We&rsquo;ll go through the entire process step by step, from creating the app in Xcode to deploying and running it on a real iPad for development.
-Let’s get started! 🚀
+  <meta name="description" content="A step-by-step guide to creating a radial audio visualizer that responds to microphone input
+Introduction
+In this tutorial, we&rsquo;ll build &ldquo;AudioWave&rdquo; - a SwiftUI app that creates a beautiful radial visualization of audio captured from the device&rsquo;s microphone. This project demonstrates several important iOS development concepts:
 
-📌 Step 1: Install Xcode
-Before creating the app, install Xcode, Apple’s official IDE for iOS and iPad development." />
+Working with microphone permissions and audio recording
+Processing real-time audio data
+Creating custom visualizations with SwiftUI
+Handling iOS permissions properly
+
+Let&rsquo;s dive in and see how we can bring audio to life visually!" />
   <meta name="author" content="Midway" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
 
   
@@ -144,187 +148,308 @@ Before creating the app, install Xcode, Apple’s official IDE for iOS and iPad 
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
     ><article>
   <header class="mb-14">
-    <h1 class="my-0! pb-2.5">A Native Swift iPad App for Audio Visualization</h1><div class="text-xs antialiased opacity-60"><time>Mar 16, 2025</time></div></header>
+    <h1 class="my-0! pb-2.5">Building a Real-Time Audio Visualizer in SwiftUI</h1><div class="text-xs antialiased opacity-60"><time>Mar 16, 2025</time></div></header>
 
-  <section><p>Creating a <strong>minimal, aesthetic audio visualization app</strong> for iPad requires <strong>native performance and a smooth user experience</strong>. In this guide, we will build <strong>Midway</strong>, a <strong>Swift-based</strong> iPad app that plays and visualizes an audio file in an elegant way.</p>
-<p>We&rsquo;ll go through the <strong>entire process step by step</strong>, from <strong>creating the app in Xcode</strong> to <strong>deploying and running it on a real iPad</strong> for development.</p>
-<p>Let’s get started! 🚀</p>
-<hr>
-<h2 id="-step-1-install-xcode"><strong>📌 Step 1: Install Xcode</strong></h2>
-<p>Before creating the app, install <strong>Xcode</strong>, Apple’s official IDE for iOS and iPad development.</p>
-<ol>
-<li>Download <strong>Xcode</strong> from the <strong>Mac App Store</strong>.</li>
-<li>Open Xcode and go to <strong>Preferences (<code>Cmd + ,</code>)</strong>.</li>
-<li>In the <strong>Locations</strong> tab, set the <strong>Command Line Tools</strong> to the latest Xcode version.</li>
-</ol>
-<hr>
-<h2 id="-step-2-create-a-new-swift-app-in-xcode"><strong>📌 Step 2: Create a New Swift App in Xcode</strong></h2>
-<ol>
-<li>Open <strong>Xcode</strong> and click <strong>&ldquo;Create a new Xcode project.&rdquo;</strong></li>
-<li>Choose <strong>App (iOS)</strong> and click <strong>Next</strong>.</li>
-<li>Configure the project:
+  <section><p><em>A step-by-step guide to creating a radial audio visualizer that responds to microphone input</em></p>
+<h2 id="introduction">Introduction</h2>
+<p>In this tutorial, we&rsquo;ll build &ldquo;AudioWave&rdquo; - a SwiftUI app that creates a beautiful radial visualization of audio captured from the device&rsquo;s microphone. This project demonstrates several important iOS development concepts:</p>
 <ul>
-<li><strong>Product Name:</strong> <code>Midway</code></li>
-<li><strong>Team:</strong> Select your Apple ID for signing.</li>
-<li><strong>Organization Identifier:</strong> <code>com.yourname.midway</code></li>
-<li><strong>Language:</strong> <code>Swift</code></li>
-<li><strong>Interface:</strong> <code>SwiftUI</code></li>
-<li><strong>Device:</strong> <code>iPad</code></li>
+<li>Working with microphone permissions and audio recording</li>
+<li>Processing real-time audio data</li>
+<li>Creating custom visualizations with SwiftUI</li>
+<li>Handling iOS permissions properly</li>
 </ul>
-</li>
-<li>Click <strong>Next</strong>, choose a folder, and click <strong>Create</strong>.</li>
-</ol>
-<h3 id="set-the-deployment-target-to-ipad"><strong>Set the Deployment Target to iPad</strong></h3>
+<p>Let&rsquo;s dive in and see how we can bring audio to life visually!</p>
+<h2 id="project-setup">Project Setup</h2>
+<p>First, create a new SwiftUI project in Xcode:</p>
 <ol>
-<li>In Xcode, go to <strong>TARGETS → Midway → General</strong>.</li>
-<li>Under <strong>Deployment Info</strong>, set:
-<ul>
-<li><strong>Device:</strong> <code>iPad</code></li>
-<li><strong>iOS Target:</strong> <code>15.0</code> or higher.</li>
-</ul>
-</li>
+<li>Open Xcode and select &ldquo;Create a new Xcode project&rdquo;</li>
+<li>Choose &ldquo;App&rdquo; as the template</li>
+<li>Name your project &ldquo;AudioWave&rdquo;</li>
+<li>Select &ldquo;SwiftUI&rdquo; for the interface and &ldquo;Swift&rdquo; for the language</li>
+<li>Choose a location to save your project</li>
 </ol>
-<hr>
-<h2 id="-step-3-connect-your-ipad-for-development"><strong>📌 Step 3: Connect Your iPad for Development</strong></h2>
-<p>To run the app on a real iPad, follow these steps:</p>
+<h2 id="step-1-setting-up-microphone-permissions">Step 1: Setting Up Microphone Permissions</h2>
+<p>iOS requires explicit permission to access the microphone. We need to:</p>
 <ol>
-<li><strong>Connect your iPad to your Mac via USB.</strong></li>
-<li>Open <strong>Xcode</strong> → <strong>Window → Devices &amp; Simulators (<code>Cmd + Shift + 2</code>)</strong>.</li>
-<li>Select your <strong>iPad</strong> from the <strong>Connected Devices</strong> list.</li>
-<li>If prompted, tap <strong>Trust This Computer</strong> on your iPad and enter your passcode.</li>
-<li>Enable <strong>Developer Mode</strong> when prompted.</li>
+<li>Add a usage description to our Info.plist</li>
+<li>Request permission at runtime</li>
 </ol>
-<hr>
-<h2 id="-step-4-build-the-minimalist-ui"><strong>📌 Step 4: Build the Minimalist UI</strong></h2>
-<p>Now, we’ll create a <strong>dark-themed, minimal UI</strong> using SwiftUI.</p>
-<h3 id="open"><strong>Open <code>ContentView.swift</code></strong></h3>
-<p>Replace the default code with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">SwiftUI</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ContentView</span>: View {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> body: some View {
-</span></span><span style="display:flex;"><span>        ZStack {
-</span></span><span style="display:flex;"><span>            Color.black.edgesIgnoringSafeArea(.all)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            VStack {
-</span></span><span style="display:flex;"><span>                Text(<span style="color:#e6db74">&#34;Midway Audio Visualizer&#34;</span>)
-</span></span><span style="display:flex;"><span>                    .font(.title)
-</span></span><span style="display:flex;"><span>                    .foregroundColor(.white)
-</span></span><span style="display:flex;"><span>                    .padding(.top, <span style="color:#ae81ff">50</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                Spacer()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                Text(<span style="color:#e6db74">&#34;Select an Audio File&#34;</span>)
-</span></span><span style="display:flex;"><span>                    .foregroundColor(.gray)
-</span></span><span style="display:flex;"><span>                    .padding()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                Spacer()
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ContentView_Previews</span>: PreviewProvider {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">var</span> previews: some View {
-</span></span><span style="display:flex;"><span>        ContentView()
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="run-the-app-on-your-ipad"><strong>Run the App on Your iPad</strong></h3>
-<ol>
-<li><strong>Plug in your iPad</strong>.</li>
-<li>In Xcode, select your iPad as the target (top left dropdown).</li>
-<li>Click <strong>Run (<code>▶️</code>)</strong>.</li>
-</ol>
-<hr>
-<h2 id="-step-5-add-audio-file-support"><strong>📌 Step 5: Add Audio File Support</strong></h2>
-<p>We’ll now allow users to <strong>import an audio file</strong> and <strong>play it</strong>.</p>
-<h3 id="add-an-audio-file-to-the-app-bundle"><strong>Add an Audio File to the App Bundle</strong></h3>
-<ol>
-<li>Drag an <code>MP3</code> or <code>WAV</code> file into Xcode under <code>Assets.xcassets</code>.</li>
-<li>Name it <code>sample_audio.mp3</code>.</li>
-</ol>
-<h3 id="modify"><strong>Modify <code>ContentView.swift</code> to Play Audio</strong></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">SwiftUI</span>
+<p>Create or modify your Info.plist file to include:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;plist</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dict&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>NSMicrophoneUsageDescription<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>AudioWave needs microphone access to visualize audio.<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>CFBundleVersion<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>1<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>CFBundleShortVersionString<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>1.0<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>CFBundleIdentifier<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>com.example.AudioWave<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>CFBundleName<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>AudioWave<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>CFBundleExecutable<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>$(EXECUTABLE_NAME)<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>CFBundlePackageType<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>APPL<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dict&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/plist&gt;</span>
+</span></span></code></pre></div><p>The <code>NSMicrophoneUsageDescription</code> key is crucial - it provides the message shown to users when requesting microphone access.</p>
+<h2 id="step-2-creating-the-audio-manager">Step 2: Creating the Audio Manager</h2>
+<p>Next, we&rsquo;ll create an <code>AudioManager</code> class to handle microphone access and process audio data:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#75715e">// AudioManager.swift</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Foundation</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">AVFoundation</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Accelerate</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ContentView</span>: View {
-</span></span><span style="display:flex;"><span>    @State <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">var</span> audioPlayer: AVAudioPlayer?
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> body: some View {
-</span></span><span style="display:flex;"><span>        ZStack {
-</span></span><span style="display:flex;"><span>            Color.black.edgesIgnoringSafeArea(.all)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            VStack {
-</span></span><span style="display:flex;"><span>                Text(<span style="color:#e6db74">&#34;Midway Audio Visualizer&#34;</span>)
-</span></span><span style="display:flex;"><span>                    .font(.title)
-</span></span><span style="display:flex;"><span>                    .foregroundColor(.white)
-</span></span><span style="display:flex;"><span>                    .padding(.top, <span style="color:#ae81ff">50</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                Spacer()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                Button(action: playAudio) {
-</span></span><span style="display:flex;"><span>                    Text(<span style="color:#e6db74">&#34;▶️ Play Audio&#34;</span>)
-</span></span><span style="display:flex;"><span>                        .font(.title2)
-</span></span><span style="display:flex;"><span>                        .foregroundColor(.white)
-</span></span><span style="display:flex;"><span>                        .padding()
-</span></span><span style="display:flex;"><span>                        .background(Color.blue)
-</span></span><span style="display:flex;"><span>                        .cornerRadius(<span style="color:#ae81ff">10</span>)
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                Spacer()
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AudioManager</span>: ObservableObject {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">var</span> audioRecorder: AVAudioRecorder?
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">var</span> timer: Timer?
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    @Published <span style="color:#66d9ef">var</span> soundSamples: [CGFloat] = Array(repeating: <span style="color:#ae81ff">0.0</span>, count: <span style="color:#ae81ff">30</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">init</span>() {
+</span></span><span style="display:flex;"><span>        setupAudioRecorder()
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">playAudio</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> url = Bundle.main.url(forResource: <span style="color:#e6db74">&#34;sample_audio&#34;</span>, withExtension: <span style="color:#e6db74">&#34;mp3&#34;</span>) <span style="color:#66d9ef">else</span> { <span style="color:#66d9ef">return</span> }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">setupAudioRecorder</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> audioSession = AVAudioSession.sharedInstance()
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">do</span> {
-</span></span><span style="display:flex;"><span>            audioPlayer = <span style="color:#66d9ef">try</span> AVAudioPlayer(contentsOf: url)
-</span></span><span style="display:flex;"><span>            audioPlayer?.play()
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> audioSession.setCategory(.playAndRecord, mode: .<span style="color:#66d9ef">default</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> audioSession.setActive(<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> url = URL(fileURLWithPath: <span style="color:#e6db74">&#34;/dev/null&#34;</span>, isDirectory: <span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> recorderSettings: [String: Any] = [
+</span></span><span style="display:flex;"><span>                AVFormatIDKey: Int(kAudioFormatAppleLossless),
+</span></span><span style="display:flex;"><span>                AVSampleRateKey: <span style="color:#ae81ff">44100.0</span>,
+</span></span><span style="display:flex;"><span>                AVNumberOfChannelsKey: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            audioRecorder = <span style="color:#66d9ef">try</span> AVAudioRecorder(url: url, settings: recorderSettings)
+</span></span><span style="display:flex;"><span>            audioRecorder?.isMeteringEnabled = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            audioRecorder?.record()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            startMonitoring()
 </span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> {
-</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Error loading audio file: </span><span style="color:#e6db74">\(</span>error<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;AudioManager initialization failed: </span><span style="color:#e6db74">\(</span>error.localizedDescription<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">startMonitoring</span>() {
+</span></span><span style="display:flex;"><span>        timer = Timer.scheduledTimer(withTimeInterval: <span style="color:#ae81ff">0.03</span>, repeats: <span style="color:#66d9ef">true</span>) { [<span style="color:#66d9ef">weak</span> <span style="color:#66d9ef">self</span>] <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">guard</span> <span style="color:#66d9ef">let</span> self = <span style="color:#66d9ef">self</span> <span style="color:#66d9ef">else</span> { <span style="color:#66d9ef">return</span> }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">self</span>.audioRecorder?.updateMeters()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Get the power level from the recorder</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> power = <span style="color:#66d9ef">self</span>.audioRecorder?.averagePower(forChannel: <span style="color:#ae81ff">0</span>) ?? <span style="color:#f92672">-</span><span style="color:#ae81ff">160</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Convert to a 0-1 scale (dB is logarithmic, typically -160 to 0)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> normalizedPower = (power <span style="color:#f92672">+</span> <span style="color:#ae81ff">50</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Add the new value and remove the oldest one</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">self</span>.soundSamples.removeFirst()
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">self</span>.soundSamples.append(CGFloat(max(<span style="color:#ae81ff">0</span>, min(normalizedPower, <span style="color:#ae81ff">1</span>))))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">stopMonitoring</span>() {
+</span></span><span style="display:flex;"><span>        timer?.invalidate()
+</span></span><span style="display:flex;"><span>        timer = <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>        audioRecorder?.stop()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">deinit</span> {
+</span></span><span style="display:flex;"><span>        stopMonitoring()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This class:</p>
+<ul>
+<li>Sets up an audio session and recorder</li>
+<li>Creates a timer to regularly sample audio levels</li>
+<li>Normalizes the audio power levels to a 0-1 scale</li>
+<li>Maintains an array of recent samples for visualization</li>
+<li>Provides methods to start and stop monitoring</li>
+</ul>
+<h2 id="step-3-building-the-radial-visualizer">Step 3: Building the Radial Visualizer</h2>
+<p>Now, let&rsquo;s create a custom SwiftUI view to visualize our audio data:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#75715e">// RadialVisualizerView.swift</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">SwiftUI</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">RadialVisualizerView</span>: View {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> samples: [CGFloat]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> color: Color = .blue
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> body: some View {
+</span></span><span style="display:flex;"><span>        GeometryReader { geometry <span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> size = min(geometry.size.width, geometry.size.height)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> middle = CGPoint(x: geometry.size.width <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>, y: geometry.size.height <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> radius = size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.5</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            ZStack {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Background circle</span>
+</span></span><span style="display:flex;"><span>                Circle()
+</span></span><span style="display:flex;"><span>                    .fill(color.opacity(<span style="color:#ae81ff">0.1</span>))
+</span></span><span style="display:flex;"><span>                    .frame(width: radius <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, height: radius <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Visualization bars</span>
+</span></span><span style="display:flex;"><span>                ForEach(<span style="color:#ae81ff">0.</span>.&lt;samples.count, id: <span style="color:#960050;background-color:#1e0010">\</span>.<span style="color:#66d9ef">self</span>) { index <span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">let</span> angle = <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> .pi <span style="color:#f92672">/</span> CGFloat(samples.count) <span style="color:#f92672">*</span> CGFloat(index)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">let</span> barHeight = radius <span style="color:#f92672">*</span> samples[index] <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.8</span>
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    Rectangle()
+</span></span><span style="display:flex;"><span>                        .fill(color)
+</span></span><span style="display:flex;"><span>                        .frame(width: <span style="color:#ae81ff">3</span>, height: barHeight)
+</span></span><span style="display:flex;"><span>                        .cornerRadius(<span style="color:#ae81ff">1.5</span>)
+</span></span><span style="display:flex;"><span>                        .offset(y: <span style="color:#f92672">-</span>radius <span style="color:#f92672">-</span> barHeight <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>                        .rotationEffect(.radians(Double(angle)))
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            .position(middle)
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h2 id="-step-6-implement-minimalist-audio-visualization"><strong>📌 Step 6: Implement Minimalist Audio Visualization</strong></h2>
-<p>To visualize audio, we need a <strong>waveform</strong>.</p>
-<h3 id="create-a-waveform-view"><strong>Create a Waveform View</strong></h3>
-<p>Add this new SwiftUI view:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">SwiftUI</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">WaveformView</span>: View {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> amplitudes: [CGFloat]
+</span></span><span style="display:flex;"><span>#Preview {
+</span></span><span style="display:flex;"><span>    RadialVisualizerView(samples: Array(repeating: CGFloat.random(<span style="color:#66d9ef">in</span>: <span style="color:#ae81ff">0.1</span>...<span style="color:#ae81ff">1.0</span>), count: <span style="color:#ae81ff">30</span>), color: .blue)
+</span></span><span style="display:flex;"><span>        .frame(width: <span style="color:#ae81ff">300</span>, height: <span style="color:#ae81ff">300</span>)
+</span></span><span style="display:flex;"><span>        .background(Color.black.opacity(<span style="color:#ae81ff">0.1</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This view:</p>
+<ul>
+<li>Takes an array of audio samples and a color as input</li>
+<li>Creates a circular background</li>
+<li>Draws bars radiating outward from the center</li>
+<li>Positions each bar at the correct angle</li>
+<li>Sizes each bar based on the corresponding audio sample value</li>
+</ul>
+<h2 id="step-4-putting-it-all-together-in-contentview">Step 4: Putting It All Together in ContentView</h2>
+<p>Finally, let&rsquo;s update our ContentView to integrate the AudioManager and RadialVisualizerView:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#75715e">// ContentView.swift</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">SwiftUI</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">AVFoundation</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">AVFAudio</span>
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ContentView</span>: View {
+</span></span><span style="display:flex;"><span>    @StateObject <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">var</span> audioManager = AudioManager()
+</span></span><span style="display:flex;"><span>    @State <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">var</span> isRecording = <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> body: some View {
-</span></span><span style="display:flex;"><span>        GeometryReader { geometry <span style="color:#66d9ef">in</span>
-</span></span><span style="display:flex;"><span>            Path { path <span style="color:#66d9ef">in</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">let</span> width = geometry.size.width
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">let</span> height = geometry.size.height
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">let</span> step = width <span style="color:#f92672">/</span> CGFloat(amplitudes.count)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0.</span>.&lt;amplitudes.count {
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">let</span> x = step <span style="color:#f92672">*</span> CGFloat(i)
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">let</span> y = height <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> amplitudes[i] <span style="color:#f92672">*</span> height <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> i == <span style="color:#ae81ff">0</span> {
-</span></span><span style="display:flex;"><span>                        path.move(to: CGPoint(x: x, y: y))
+</span></span><span style="display:flex;"><span>        VStack {
+</span></span><span style="display:flex;"><span>            Text(<span style="color:#e6db74">&#34;AudioWave&#34;</span>)
+</span></span><span style="display:flex;"><span>                .font(.largeTitle)
+</span></span><span style="display:flex;"><span>                .fontWeight(.bold)
+</span></span><span style="display:flex;"><span>                .padding()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            RadialVisualizerView(samples: audioManager.soundSamples, color: .blue)
+</span></span><span style="display:flex;"><span>                .frame(height: <span style="color:#ae81ff">300</span>)
+</span></span><span style="display:flex;"><span>                .padding()
+</span></span><span style="display:flex;"><span>                .background(
+</span></span><span style="display:flex;"><span>                    RoundedRectangle(cornerRadius: <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>                        .fill(Color.black.opacity(<span style="color:#ae81ff">0.05</span>))
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>                .padding()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            Button(action: {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> isRecording {
+</span></span><span style="display:flex;"><span>                    audioManager.stopMonitoring()
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    audioManager.setupAudioRecorder()
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                isRecording.toggle()
+</span></span><span style="display:flex;"><span>            }) {
+</span></span><span style="display:flex;"><span>                Text(isRecording ? <span style="color:#e6db74">&#34;Stop Listening&#34;</span> : <span style="color:#e6db74">&#34;Start Listening&#34;</span>)
+</span></span><span style="display:flex;"><span>                    .padding()
+</span></span><span style="display:flex;"><span>                    .background(isRecording ? Color.red : Color.blue)
+</span></span><span style="display:flex;"><span>                    .foregroundColor(.white)
+</span></span><span style="display:flex;"><span>                    .cornerRadius(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            .padding()
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        .onAppear {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Request microphone permission when the view appears</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#75715e">#available</span>(<span style="color:#75715e">iOS</span> <span style="color:#ae81ff">17.0</span>, <span style="color:#f92672">*</span>) {
+</span></span><span style="display:flex;"><span>                AVAudioApplication.requestRecordPermission(completionHandler: { granted <span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> granted {
+</span></span><span style="display:flex;"><span>                        print(<span style="color:#e6db74">&#34;Microphone access granted&#34;</span>)
 </span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                        path.addLine(to: CGPoint(x: x, y: y))
+</span></span><span style="display:flex;"><span>                        print(<span style="color:#e6db74">&#34;Microphone access denied&#34;</span>)
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                })
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Fallback for iOS versions before 17.0</span>
+</span></span><span style="display:flex;"><span>                AVAudioSession.sharedInstance().requestRecordPermission { granted <span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> granted {
+</span></span><span style="display:flex;"><span>                        print(<span style="color:#e6db74">&#34;Microphone access granted&#34;</span>)
+</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                        print(<span style="color:#e6db74">&#34;Microphone access denied&#34;</span>)
 </span></span><span style="display:flex;"><span>                    }
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            .stroke(Color.blue, lineWidth: <span style="color:#ae81ff">2</span>)
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h2 id="-next-steps"><strong>💪 Next Steps</strong></h2>
-<p>🎭 <strong>Enhance Aesthetics</strong> (Smooth Animations, Particle Effects)<br>
-🎵 <strong>Live Audio Processing</strong> (Real-Time Microphone Input)<br>
-📲 <strong>Deploy the App to the App Store</strong></p>
-<p>This Swift iPad app now has a <strong>minimal, elegant</strong> <strong>audio visualizer</strong>! 🚀 Let me know if you need improvements. 🎶</p>
+</span></span></code></pre></div><p>This view:</p>
+<ul>
+<li>Creates an instance of our AudioManager</li>
+<li>Displays the app title</li>
+<li>Shows the RadialVisualizerView with current audio samples</li>
+<li>Provides a button to start/stop audio monitoring</li>
+<li>Requests microphone permission when the view appears</li>
+<li>Handles compatibility with different iOS versions</li>
+</ul>
+<h2 id="troubleshooting-common-issues">Troubleshooting Common Issues</h2>
+<p>During development, we encountered several issues that you might also face:</p>
+<h3 id="1-missing-avfoundation-import">1. Missing AVFoundation Import</h3>
+<p>If you see an error like <code>Cannot find 'AVAudioSession' in scope</code>, make sure to import AVFoundation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">AVFoundation</span>
+</span></span></code></pre></div><h3 id="2-multiple-infoplist-files">2. Multiple Info.plist Files</h3>
+<p>If you get an error about multiple Info.plist files, you need to configure your project settings:</p>
+<ol>
+<li>Go to your project settings</li>
+<li>Set <code>GENERATE_INFOPLIST_FILE = NO</code></li>
+<li>Set <code>INFOPLIST_FILE = AudioWave/Info.plist</code></li>
+</ol>
+<h3 id="3-missing-required-infoplist-keys">3. Missing Required Info.plist Keys</h3>
+<p>iOS requires certain keys in your Info.plist:</p>
+<ul>
+<li><code>CFBundleVersion</code> - The build number</li>
+<li><code>CFBundleShortVersionString</code> - The version number</li>
+<li><code>CFBundleIdentifier</code> - The bundle identifier</li>
+<li><code>NSMicrophoneUsageDescription</code> - Explanation for microphone use</li>
+</ul>
+<h3 id="4-deprecated-api-methods">4. Deprecated API Methods</h3>
+<p>For iOS 17+, use the updated microphone permission request method:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-swift" data-lang="swift"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#75715e">#available</span>(<span style="color:#75715e">iOS</span> <span style="color:#ae81ff">17.0</span>, <span style="color:#f92672">*</span>) {
+</span></span><span style="display:flex;"><span>    AVAudioApplication.requestRecordPermission(completionHandler: { granted <span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Handle permission result</span>
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    AVAudioSession.sharedInstance().requestRecordPermission { granted <span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Handle permission result</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>Congratulations! You&rsquo;ve built a real-time audio visualizer in SwiftUI. This project demonstrates:</p>
+<ul>
+<li>Working with device sensors (microphone)</li>
+<li>Processing real-time data</li>
+<li>Creating custom visualizations</li>
+<li>Handling permissions properly</li>
+<li>Supporting different iOS versions</li>
+</ul>
+<p>You can extend this project in many ways:</p>
+<ul>
+<li>Add different visualization styles</li>
+<li>Allow users to customize colors and sensitivity</li>
+<li>Save and share visualizations</li>
+<li>Add audio effects or filters</li>
+</ul>
+<p>The combination of SwiftUI&rsquo;s powerful drawing capabilities with AVFoundation&rsquo;s audio processing makes it possible to create beautiful, responsive audio visualizations with relatively little code.</p>
+<p>Happy coding!</p>
+<hr>
 </section>
 
   <nav

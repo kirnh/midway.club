@@ -9,18 +9,25 @@
     <lastBuildDate>Sun, 16 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>A Native Swift iPad App for Audio Visualization</title>
+      <title>Building a Real-Time Audio Visualizer in SwiftUI</title>
       <link>http://localhost:1313/posts/ipad-audio-visualization/</link>
       <pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/ipad-audio-visualization/</guid>
-      <description>&lt;p&gt;Creating a &lt;strong&gt;minimal, aesthetic audio visualization app&lt;/strong&gt; for iPad requires &lt;strong&gt;native performance and a smooth user experience&lt;/strong&gt;. In this guide, we will build &lt;strong&gt;Midway&lt;/strong&gt;, a &lt;strong&gt;Swift-based&lt;/strong&gt; iPad app that plays and visualizes an audio file in an elegant way.&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;ll go through the &lt;strong&gt;entire process step by step&lt;/strong&gt;, from &lt;strong&gt;creating the app in Xcode&lt;/strong&gt; to &lt;strong&gt;deploying and running it on a real iPad&lt;/strong&gt; for development.&lt;/p&gt;&#xA;&lt;p&gt;Let’s get started! 🚀&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-step-1-install-xcode&#34;&gt;&lt;strong&gt;📌 Step 1: Install Xcode&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Before creating the app, install &lt;strong&gt;Xcode&lt;/strong&gt;, Apple’s official IDE for iOS and iPad development.&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;em&gt;A step-by-step guide to creating a radial audio visualizer that responds to microphone input&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this tutorial, we&amp;rsquo;ll build &amp;ldquo;AudioWave&amp;rdquo; - a SwiftUI app that creates a beautiful radial visualization of audio captured from the device&amp;rsquo;s microphone. This project demonstrates several important iOS development concepts:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Working with microphone permissions and audio recording&lt;/li&gt;&#xA;&lt;li&gt;Processing real-time audio data&lt;/li&gt;&#xA;&lt;li&gt;Creating custom visualizations with SwiftUI&lt;/li&gt;&#xA;&lt;li&gt;Handling iOS permissions properly&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s dive in and see how we can bring audio to life visually!&lt;/p&gt;</description>
     </item>
     <item>
       <title>Persistent Bluetooth Connection Between Raspberry Pi and iPad</title>
       <link>http://localhost:1313/posts/raspberrypi-ipad-bluetooth/</link>
-      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 15 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/raspberrypi-ipad-bluetooth/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;This guide walks you through the process of:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;One-time pairing of the Raspberry Pi with the iPad.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Setting up a Bash script to maintain a persistent Bluetooth connection.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Running the script automatically on boot using &lt;code&gt;systemd&lt;/code&gt;.&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;With this setup, the Raspberry Pi will continuously monitor the Bluetooth connection and automatically reconnect to the iPad if disconnected.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-one-time-bluetooth-pairing&#34;&gt;&lt;strong&gt;1. One-Time Bluetooth Pairing&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Before setting up the automatic connection, you need to &lt;strong&gt;pair your iPad with the Raspberry Pi manually&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Raspberry Pi Headless Setup Guide</title>
+      <link>http://localhost:1313/posts/raspberrypi-setup/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/raspberrypi-setup/</guid>
+      <description>&lt;h1 id=&#34;raspberry-pi-headless-setup-guide&#34;&gt;Raspberry Pi Headless Setup Guide&lt;/h1&gt;&#xA;&lt;p&gt;Setting up a Raspberry Pi without a monitor, keyboard, or mouse (headless setup) is a convenient way to configure your Pi for remote use. This guide will walk you through the entire process, from flashing the OS to connecting via SSH and setting up Wi-Fi.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A Raspberry Pi (any model, preferably with built-in Wi-Fi like the Raspberry Pi 4, 3B+)&lt;/li&gt;&#xA;&lt;li&gt;A microSD card (16GB or larger, Class 10 recommended)&lt;/li&gt;&#xA;&lt;li&gt;A microSD card reader&lt;/li&gt;&#xA;&lt;li&gt;A power adapter suitable for your Raspberry Pi&lt;/li&gt;&#xA;&lt;li&gt;A computer (Windows, macOS, or Linux)&lt;/li&gt;&#xA;&lt;li&gt;A stable internet connection&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;step-1-download-raspberry-pi-os&#34;&gt;Step 1: Download Raspberry Pi OS&lt;/h2&gt;&#xA;&lt;p&gt;Raspberry Pi OS (formerly Raspbian) is the recommended operating system. You can download it from the official site:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Deploying Hugo site to GitHub Pages</title>
@@ -35,13 +42,6 @@
       <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/local-hugo-static-site-setup/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;1.1: Install Hugo&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Hugo is a static site generator that is simple to use. Install it based on your OS:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;macOS (Homebrew)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;brew install hugo&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Windows (Chocolatey)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;choco install hugo -confirm&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Ubuntu/Debian&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;sudo apt install hugo&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;1.2: Create Your Site&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Run:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo new site dev-docs&#xA;cd dev-docs&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;1.3: Choose a Theme&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Hugo themes define the design of your site. You can pick one from &lt;a href=&#34;https://themes.gohugo.io/&#34;&gt;https://themes.gohugo.io/&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;For a simple, aesthetic theme, let’s use &lt;strong&gt;Paper&lt;/strong&gt;:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Raspberry Pi Headless Setup Guide</title>
-      <link>http://localhost:1313/posts/raspberrypi-setup/</link>
-      <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/raspberrypi-setup/</guid>
-      <description>&lt;h1 id=&#34;raspberry-pi-headless-setup-guide&#34;&gt;Raspberry Pi Headless Setup Guide&lt;/h1&gt;&#xA;&lt;p&gt;Setting up a Raspberry Pi without a monitor, keyboard, or mouse (headless setup) is a convenient way to configure your Pi for remote use. This guide will walk you through the entire process, from flashing the OS to connecting via SSH and setting up Wi-Fi.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A Raspberry Pi (any model, preferably with built-in Wi-Fi like the Raspberry Pi 4, 3B+)&lt;/li&gt;&#xA;&lt;li&gt;A microSD card (16GB or larger, Class 10 recommended)&lt;/li&gt;&#xA;&lt;li&gt;A microSD card reader&lt;/li&gt;&#xA;&lt;li&gt;A power adapter suitable for your Raspberry Pi&lt;/li&gt;&#xA;&lt;li&gt;A computer (Windows, macOS, or Linux)&lt;/li&gt;&#xA;&lt;li&gt;A stable internet connection&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;step-1-download-raspberry-pi-os&#34;&gt;Step 1: Download Raspberry Pi OS&lt;/h2&gt;&#xA;&lt;p&gt;Raspberry Pi OS (formerly Raspbian) is the recommended operating system. You can download it from the official site:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

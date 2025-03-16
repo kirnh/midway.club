@@ -1,200 +1,344 @@
 ---
 Date: 2025-03-16
-title: A Native Swift iPad App for Audio Visualization
+Title: Building a Real-Time Audio Visualizer in SwiftUI
 ---
 
-Creating a **minimal, aesthetic audio visualization app** for iPad requires **native performance and a smooth user experience**. In this guide, we will build **Midway**, a **Swift-based** iPad app that plays and visualizes an audio file in an elegant way.
+*A step-by-step guide to creating a radial audio visualizer that responds to microphone input*
 
-We'll go through the **entire process step by step**, from **creating the app in Xcode** to **deploying and running it on a real iPad** for development.
+## Introduction
 
-Let’s get started! 🚀  
+In this tutorial, we'll build "AudioWave" - a SwiftUI app that creates a beautiful radial visualization of audio captured from the device's microphone. This project demonstrates several important iOS development concepts:
 
----
+- Working with microphone permissions and audio recording
+- Processing real-time audio data
+- Creating custom visualizations with SwiftUI
+- Handling iOS permissions properly
 
-## **📌 Step 1: Install Xcode**  
-Before creating the app, install **Xcode**, Apple’s official IDE for iOS and iPad development.
+Let's dive in and see how we can bring audio to life visually!
 
-1. Download **Xcode** from the **Mac App Store**.
-2. Open Xcode and go to **Preferences (`Cmd + ,`)**.
-3. In the **Locations** tab, set the **Command Line Tools** to the latest Xcode version.
+## Project Setup
 
----
+First, create a new SwiftUI project in Xcode:
 
-## **📌 Step 2: Create a New Swift App in Xcode**  
+1. Open Xcode and select "Create a new Xcode project"
+2. Choose "App" as the template
+3. Name your project "AudioWave"
+4. Select "SwiftUI" for the interface and "Swift" for the language
+5. Choose a location to save your project
 
-1. Open **Xcode** and click **"Create a new Xcode project."**
-2. Choose **App (iOS)** and click **Next**.
-3. Configure the project:
-   - **Product Name:** `Midway`
-   - **Team:** Select your Apple ID for signing.
-   - **Organization Identifier:** `com.yourname.midway`
-   - **Language:** `Swift`
-   - **Interface:** `SwiftUI`
-   - **Device:** `iPad`
-4. Click **Next**, choose a folder, and click **Create**.
+## Step 1: Setting Up Microphone Permissions
 
-### **Set the Deployment Target to iPad**
-1. In Xcode, go to **TARGETS → Midway → General**.
-2. Under **Deployment Info**, set:
-   - **Device:** `iPad`
-   - **iOS Target:** `15.0` or higher.
+iOS requires explicit permission to access the microphone. We need to:
 
----
+1. Add a usage description to our Info.plist
+2. Request permission at runtime
 
-## **📌 Step 3: Connect Your iPad for Development**  
-To run the app on a real iPad, follow these steps:
+Create or modify your Info.plist file to include:
 
-1. **Connect your iPad to your Mac via USB.**
-2. Open **Xcode** → **Window → Devices & Simulators (`Cmd + Shift + 2`)**.
-3. Select your **iPad** from the **Connected Devices** list.
-4. If prompted, tap **Trust This Computer** on your iPad and enter your passcode.
-5. Enable **Developer Mode** when prompted.
-
----
-
-## **📌 Step 4: Build the Minimalist UI**
-Now, we’ll create a **dark-themed, minimal UI** using SwiftUI.
-
-### **Open `ContentView.swift`**
-Replace the default code with:
-
-```swift
-import SwiftUI
-
-struct ContentView: View {
-    var body: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-
-            VStack {
-                Text("Midway Audio Visualizer")
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .padding(.top, 50)
-
-                Spacer()
-
-                Text("Select an Audio File")
-                    .foregroundColor(.gray)
-                    .padding()
-
-                Spacer()
-            }
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>AudioWave needs microphone access to visualize audio.</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.example.AudioWave</string>
+    <key>CFBundleName</key>
+    <string>AudioWave</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+</dict>
+</plist>
 ```
 
-### **Run the App on Your iPad**
-1. **Plug in your iPad**.
-2. In Xcode, select your iPad as the target (top left dropdown).
-3. Click **Run (`▶️`)**.
+The `NSMicrophoneUsageDescription` key is crucial - it provides the message shown to users when requesting microphone access.
 
----
+## Step 2: Creating the Audio Manager
 
-## **📌 Step 5: Add Audio File Support**
-We’ll now allow users to **import an audio file** and **play it**.
+Next, we'll create an `AudioManager` class to handle microphone access and process audio data:
 
-### **Add an Audio File to the App Bundle**
-1. Drag an `MP3` or `WAV` file into Xcode under `Assets.xcassets`.
-2. Name it `sample_audio.mp3`.
-
-### **Modify `ContentView.swift` to Play Audio**
 ```swift
-import SwiftUI
+// AudioManager.swift
+import Foundation
 import AVFoundation
+import Accelerate
 
-struct ContentView: View {
-    @State private var audioPlayer: AVAudioPlayer?
-
-    var body: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-
-            VStack {
-                Text("Midway Audio Visualizer")
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .padding(.top, 50)
-
-                Spacer()
-
-                Button(action: playAudio) {
-                    Text("▶️ Play Audio")
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                }
-
-                Spacer()
-            }
-        }
+class AudioManager: ObservableObject {
+    private var audioRecorder: AVAudioRecorder?
+    private var timer: Timer?
+    
+    @Published var soundSamples: [CGFloat] = Array(repeating: 0.0, count: 30)
+    
+    init() {
+        setupAudioRecorder()
     }
-
-    func playAudio() {
-        guard let url = Bundle.main.url(forResource: "sample_audio", withExtension: "mp3") else { return }
+    
+    func setupAudioRecorder() {
+        let audioSession = AVAudioSession.sharedInstance()
         
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.play()
+            try audioSession.setCategory(.playAndRecord, mode: .default)
+            try audioSession.setActive(true)
+            
+            let url = URL(fileURLWithPath: "/dev/null", isDirectory: true)
+            let recorderSettings: [String: Any] = [
+                AVFormatIDKey: Int(kAudioFormatAppleLossless),
+                AVSampleRateKey: 44100.0,
+                AVNumberOfChannelsKey: 1,
+                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ]
+            
+            audioRecorder = try AVAudioRecorder(url: url, settings: recorderSettings)
+            audioRecorder?.isMeteringEnabled = true
+            audioRecorder?.record()
+            
+            startMonitoring()
         } catch {
-            print("Error loading audio file: \(error)")
+            print("AudioManager initialization failed: \(error.localizedDescription)")
         }
+    }
+    
+    func startMonitoring() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            self.audioRecorder?.updateMeters()
+            
+            // Get the power level from the recorder
+            let power = self.audioRecorder?.averagePower(forChannel: 0) ?? -160
+            // Convert to a 0-1 scale (dB is logarithmic, typically -160 to 0)
+            let normalizedPower = (power + 50) / 50
+            
+            // Add the new value and remove the oldest one
+            self.soundSamples.removeFirst()
+            self.soundSamples.append(CGFloat(max(0, min(normalizedPower, 1))))
+        }
+    }
+    
+    func stopMonitoring() {
+        timer?.invalidate()
+        timer = nil
+        audioRecorder?.stop()
+    }
+    
+    deinit {
+        stopMonitoring()
     }
 }
 ```
 
----
+This class:
+- Sets up an audio session and recorder
+- Creates a timer to regularly sample audio levels
+- Normalizes the audio power levels to a 0-1 scale
+- Maintains an array of recent samples for visualization
+- Provides methods to start and stop monitoring
 
-## **📌 Step 6: Implement Minimalist Audio Visualization**
-To visualize audio, we need a **waveform**.
+## Step 3: Building the Radial Visualizer
 
-### **Create a Waveform View**
-Add this new SwiftUI view:
+Now, let's create a custom SwiftUI view to visualize our audio data:
+
 ```swift
+// RadialVisualizerView.swift
 import SwiftUI
 
-struct WaveformView: View {
-    let amplitudes: [CGFloat]
-
+struct RadialVisualizerView: View {
+    var samples: [CGFloat]
+    var color: Color = .blue
+    
     var body: some View {
         GeometryReader { geometry in
-            Path { path in
-                let width = geometry.size.width
-                let height = geometry.size.height
-                let step = width / CGFloat(amplitudes.count)
+            let size = min(geometry.size.width, geometry.size.height)
+            let middle = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
+            let radius = size / 2.5
+            
+            ZStack {
+                // Background circle
+                Circle()
+                    .fill(color.opacity(0.1))
+                    .frame(width: radius * 2, height: radius * 2)
+                
+                // Visualization bars
+                ForEach(0..<samples.count, id: \.self) { index in
+                    let angle = 2 * .pi / CGFloat(samples.count) * CGFloat(index)
+                    let barHeight = radius * samples[index] * 0.8
+                    
+                    Rectangle()
+                        .fill(color)
+                        .frame(width: 3, height: barHeight)
+                        .cornerRadius(1.5)
+                        .offset(y: -radius - barHeight / 2)
+                        .rotationEffect(.radians(Double(angle)))
+                }
+            }
+            .position(middle)
+        }
+    }
+}
 
-                for i in 0..<amplitudes.count {
-                    let x = step * CGFloat(i)
-                    let y = height / 2 - amplitudes[i] * height / 2
+#Preview {
+    RadialVisualizerView(samples: Array(repeating: CGFloat.random(in: 0.1...1.0), count: 30), color: .blue)
+        .frame(width: 300, height: 300)
+        .background(Color.black.opacity(0.1))
+}
+```
 
-                    if i == 0 {
-                        path.move(to: CGPoint(x: x, y: y))
+This view:
+- Takes an array of audio samples and a color as input
+- Creates a circular background
+- Draws bars radiating outward from the center
+- Positions each bar at the correct angle
+- Sizes each bar based on the corresponding audio sample value
+
+## Step 4: Putting It All Together in ContentView
+
+Finally, let's update our ContentView to integrate the AudioManager and RadialVisualizerView:
+
+```swift
+// ContentView.swift
+import SwiftUI
+import AVFoundation
+import AVFAudio
+
+struct ContentView: View {
+    @StateObject private var audioManager = AudioManager()
+    @State private var isRecording = false
+    
+    var body: some View {
+        VStack {
+            Text("AudioWave")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding()
+            
+            RadialVisualizerView(samples: audioManager.soundSamples, color: .blue)
+                .frame(height: 300)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.black.opacity(0.05))
+                )
+                .padding()
+            
+            Button(action: {
+                if isRecording {
+                    audioManager.stopMonitoring()
+                } else {
+                    audioManager.setupAudioRecorder()
+                }
+                isRecording.toggle()
+            }) {
+                Text(isRecording ? "Stop Listening" : "Start Listening")
+                    .padding()
+                    .background(isRecording ? Color.red : Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding()
+        }
+        .onAppear {
+            // Request microphone permission when the view appears
+            if #available(iOS 17.0, *) {
+                AVAudioApplication.requestRecordPermission(completionHandler: { granted in
+                    if granted {
+                        print("Microphone access granted")
                     } else {
-                        path.addLine(to: CGPoint(x: x, y: y))
+                        print("Microphone access denied")
+                    }
+                })
+            } else {
+                // Fallback for iOS versions before 17.0
+                AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                    if granted {
+                        print("Microphone access granted")
+                    } else {
+                        print("Microphone access denied")
                     }
                 }
             }
-            .stroke(Color.blue, lineWidth: 2)
         }
     }
 }
 ```
 
+This view:
+- Creates an instance of our AudioManager
+- Displays the app title
+- Shows the RadialVisualizerView with current audio samples
+- Provides a button to start/stop audio monitoring
+- Requests microphone permission when the view appears
+- Handles compatibility with different iOS versions
+
+## Troubleshooting Common Issues
+
+During development, we encountered several issues that you might also face:
+
+### 1. Missing AVFoundation Import
+
+If you see an error like `Cannot find 'AVAudioSession' in scope`, make sure to import AVFoundation:
+
+```swift
+import AVFoundation
+```
+
+### 2. Multiple Info.plist Files
+
+If you get an error about multiple Info.plist files, you need to configure your project settings:
+
+1. Go to your project settings
+2. Set `GENERATE_INFOPLIST_FILE = NO`
+3. Set `INFOPLIST_FILE = AudioWave/Info.plist`
+
+### 3. Missing Required Info.plist Keys
+
+iOS requires certain keys in your Info.plist:
+
+- `CFBundleVersion` - The build number
+- `CFBundleShortVersionString` - The version number
+- `CFBundleIdentifier` - The bundle identifier
+- `NSMicrophoneUsageDescription` - Explanation for microphone use
+
+### 4. Deprecated API Methods
+
+For iOS 17+, use the updated microphone permission request method:
+
+```swift
+if #available(iOS 17.0, *) {
+    AVAudioApplication.requestRecordPermission(completionHandler: { granted in
+        // Handle permission result
+    })
+} else {
+    AVAudioSession.sharedInstance().requestRecordPermission { granted in
+        // Handle permission result
+    }
+}
+```
+
+## Conclusion
+
+Congratulations! You've built a real-time audio visualizer in SwiftUI. This project demonstrates:
+
+- Working with device sensors (microphone)
+- Processing real-time data
+- Creating custom visualizations
+- Handling permissions properly
+- Supporting different iOS versions
+
+You can extend this project in many ways:
+- Add different visualization styles
+- Allow users to customize colors and sensitivity
+- Save and share visualizations
+- Add audio effects or filters
+
+The combination of SwiftUI's powerful drawing capabilities with AVFoundation's audio processing makes it possible to create beautiful, responsive audio visualizations with relatively little code.
+
+Happy coding!
+
 ---
-
-## **💪 Next Steps**
-🎭 **Enhance Aesthetics** (Smooth Animations, Particle Effects)  
-🎵 **Live Audio Processing** (Real-Time Microphone Input)  
-📲 **Deploy the App to the App Store**  
-
-This Swift iPad app now has a **minimal, elegant** **audio visualizer**! 🚀 Let me know if you need improvements. 🎶
 
