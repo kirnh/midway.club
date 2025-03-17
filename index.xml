@@ -2,7 +2,136 @@
 &lt;p>The way we speak can reveal a lot about our mental and emotional health. Subtle vocal cues – from tone and pitch to pace and pauses – often reflect our mood and stress levels [1]. In recent years, artificial intelligence (AI) has begun leveraging these cues in real time to support mental well-being, improve communication, and even coach our relationships. &lt;strong>AI-driven voice companion&lt;/strong> tools are emerging that listen to &lt;strong>how&lt;/strong> we talk (not just &lt;strong>what&lt;/strong> we say) and provide feedback or support. These range from emotion-sensing mental health apps to AI “communication coaches” that analyze tone in conversations.&lt;/p></description></item><item><title>Enriching Every Conversation</title><link>https://www.midway.club/about/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/about/</guid><description>&lt;h2 id="vision">Vision&lt;/h2>
 &lt;p>We envision a future where wearable microphones seamlessly enrich the fabric of daily interactions, fostering deeper understanding, empathy, and emotional connection in personal relationships. Recognizing that strong, nurturing relationships are at the heart of overall mental well-being, we aim to empower individuals to develop healthier communication habits while preserving the privacy and trust essential for genuine human connection.&lt;/p>
 &lt;h2 id="mission">Mission&lt;/h2>
-&lt;p>Our mission at Midway is to strengthen relationship health through privacy-centric audio solutions. By enabling insightful yet respectful analysis of interpersonal communication patterns, we help individuals and couples cultivate healthier, more fulfilling bonds. We achieve this by:&lt;/p></description></item><item><title>Privacy in Wearable Technologies - Balancing Always‑On Listening with User Trust</title><link>https://www.midway.club/posts/privacy-in-wearables/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/privacy-in-wearables/</guid><description>&lt;p>Wearable technologies like smartwatches, fitness trackers, smart earbuds, and new AI-powered voice companions offer incredible convenience—but they also spark serious privacy questions. As some devices move toward &lt;strong>constantly listening&lt;/strong> microphones for seamless voice assistance, how can they deliver full functionality &lt;strong>and&lt;/strong> protect user privacy? In this post, we dive into current privacy practices in wearables, the legal landscape, technical privacy solutions, consumer sentiment, and best practices for designing privacy-first voice wearables.&lt;/p></description></item><item><title>Voice Analysis for Mental Well-Being and Communication - A Research-Driven Overview</title><link>https://www.midway.club/posts/voice-analysis-mental-health-reseach-overview/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/voice-analysis-mental-health-reseach-overview/</guid><description>&lt;p>Below is a blog post that focuses on the &lt;strong>research-based findings&lt;/strong> regarding continuous voice monitoring for mental health, communication, and relationship insights. It reflects the core research content—how AI-driven speech analysis works, which metrics it targets, and how these insights align with established psychological frameworks.&lt;/p>
+&lt;p>Our mission at Midway is to strengthen relationship health through privacy-centric audio solutions. By enabling insightful yet respectful analysis of interpersonal communication patterns, we help individuals and couples cultivate healthier, more fulfilling bonds. We achieve this by:&lt;/p></description></item><item><title>How to Build a Wearable Microphone That Records Only the Speaker for a Full Day</title><link>https://www.midway.club/posts/record-only-speaker/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/record-only-speaker/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>Creating a &lt;strong>wearable microphone&lt;/strong> that records only the speaker while ensuring a full day&amp;rsquo;s battery life requires a combination of &lt;strong>low-power hardware&lt;/strong>, &lt;strong>smart signal processing&lt;/strong>, and &lt;strong>efficient AI models&lt;/strong>. This guide breaks down the key components and steps to achieve this.&lt;/p>
+&lt;h2 id="1-hardware-requirements">1. Hardware Requirements&lt;/h2>
+&lt;h3 id="microphone-selection">&lt;strong>Microphone Selection&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>MEMS Microphone&lt;/strong> (e.g., Knowles SPH0645LM4H-B) for power efficiency.&lt;/li>
+&lt;li>&lt;strong>Directional Microphone&lt;/strong> to focus on the speaker and reduce background noise.&lt;/li>
+&lt;li>&lt;strong>Bone Conduction Mic&lt;/strong> (e.g., Vesper VM2020) for extreme noise resistance.&lt;/li>
+&lt;/ul>
+&lt;h3 id="processing-unit">&lt;strong>Processing Unit&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Low-power DSP (Digital Signal Processor)&lt;/strong> (e.g., Qualcomm QCC5141, Ambiq Apollo4)&lt;/li>
+&lt;li>&lt;strong>MCU with Edge AI Support&lt;/strong> (e.g., ESP32-S3, Raspberry Pi RP2040 with TinyML)&lt;/li>
+&lt;/ul>
+&lt;h3 id="battery--power-optimization">&lt;strong>Battery &amp;amp; Power Optimization&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>1000mAh Li-Po Battery&lt;/strong> for extended life.&lt;/li>
+&lt;li>&lt;strong>Efficient Power Management IC (PMIC)&lt;/strong> (e.g., Texas Instruments BQ24074).&lt;/li>
+&lt;li>&lt;strong>Low-Power Sleep Mode&lt;/strong> when not in active recording.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-ai-based-speaker-recognition">2. AI-Based Speaker Recognition&lt;/h2>
+&lt;h3 id="feature-extraction">&lt;strong>Feature Extraction&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>Use &lt;strong>MFCCs (Mel-Frequency Cepstral Coefficients)&lt;/strong> or &lt;strong>wav2vec embeddings&lt;/strong> for voice signatures.&lt;/li>
+&lt;/ul>
+&lt;h3 id="on-device-speaker-identification">&lt;strong>On-Device Speaker Identification&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Lightweight TinyML Model&lt;/strong> trained on the speaker’s voice.&lt;/li>
+&lt;li>&lt;strong>Wake-word detection&lt;/strong> to trigger recording only when the speaker talks.&lt;/li>
+&lt;/ul>
+&lt;h3 id="noise-filtering">&lt;strong>Noise Filtering&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Beamforming Algorithms&lt;/strong> (e.g., Superdirective Beamforming) to isolate the speaker’s voice.&lt;/li>
+&lt;li>&lt;strong>Adaptive Noise Cancellation (ANC)&lt;/strong> using DSP.&lt;/li>
+&lt;/ul>
+&lt;h2 id="3-storage--data-transmission">3. Storage &amp;amp; Data Transmission&lt;/h2>
+&lt;h3 id="storage-options">&lt;strong>Storage Options&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Local Storage (microSD or Flash Memory)&lt;/strong> for offline recording.&lt;/li>
+&lt;li>&lt;strong>Compressed Audio (AAC or Opus format)&lt;/strong> for minimal space usage.&lt;/li>
+&lt;/ul>
+&lt;h3 id="transmission">&lt;strong>Transmission&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Bluetooth Low Energy (BLE)&lt;/strong> for short bursts of audio transmission.&lt;/li>
+&lt;li>&lt;strong>Wi-Fi or LTE Module&lt;/strong> (optional) for cloud backup when needed.&lt;/li>
+&lt;/ul>
+&lt;h2 id="4-wearable-design-considerations">4. Wearable Design Considerations&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Form Factor:&lt;/strong> Necklace, clip-on, or integrated into clothing.&lt;/li>
+&lt;li>&lt;strong>Weight:&lt;/strong> Less than 50g for comfort.&lt;/li>
+&lt;li>&lt;strong>Heat Dissipation:&lt;/strong> Ensure efficient power use to prevent overheating.&lt;/li>
+&lt;/ul>
+&lt;h2 id="5-software--model-deployment">5. Software &amp;amp; Model Deployment&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Embedded Firmware:&lt;/strong> TinyML model deployment with TensorFlow Lite.&lt;/li>
+&lt;li>&lt;strong>Mobile App:&lt;/strong> Optional app for adjusting settings and reviewing recordings.&lt;/li>
+&lt;li>&lt;strong>OTA Updates:&lt;/strong> To improve AI models over time.&lt;/li>
+&lt;/ul>
+&lt;h2 id="6-expected-battery-life-estimation">6. Expected Battery Life Estimation&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>Component&lt;/th>
+ &lt;th>Power Consumption&lt;/th>
+ &lt;th>Estimated Usage Time&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>MEMS Microphone&lt;/td>
+ &lt;td>~0.5mW&lt;/td>
+ &lt;td>Negligible impact&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DSP Processing&lt;/td>
+ &lt;td>~10mW&lt;/td>
+ &lt;td>~100 hours&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>BLE Transmission&lt;/td>
+ &lt;td>~15mW (intermittent)&lt;/td>
+ &lt;td>~24+ hours&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Flash Storage Write&lt;/td>
+ &lt;td>~20mW&lt;/td>
+ &lt;td>~50 hours&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Total Estimated Power Draw&lt;/td>
+ &lt;td>~30mW average&lt;/td>
+ &lt;td>&lt;strong>24+ hours&lt;/strong>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="7-challenges--solutions">7. Challenges &amp;amp; Solutions&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>Challenge&lt;/th>
+ &lt;th>Solution&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>High background noise&lt;/td>
+ &lt;td>Use beamforming + bone conduction mic&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Battery drain&lt;/td>
+ &lt;td>Optimize DSP power usage &amp;amp; sleep mode&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Processing on-device&lt;/td>
+ &lt;td>Use TinyML with quantized models&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Privacy concerns&lt;/td>
+ &lt;td>Store locally, encrypt data&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="8-next-steps">8. Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>Prototype with ESP32-S3 + MEMS Mic + BLE.&lt;/li>
+&lt;li>Train a TinyML speaker model.&lt;/li>
+&lt;li>Optimize power consumption with PMIC.&lt;/li>
+&lt;li>Test real-world performance with various noise environments.&lt;/li>
+&lt;/ul>
+&lt;p>With the right optimizations, this &lt;strong>wearable speaker-specific microphone&lt;/strong> can last a full day while recording only the intended speaker!&lt;/p></description></item><item><title>Privacy in Wearable Technologies - Balancing Always‑On Listening with User Trust</title><link>https://www.midway.club/posts/privacy-in-wearables/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/privacy-in-wearables/</guid><description>&lt;p>Wearable technologies like smartwatches, fitness trackers, smart earbuds, and new AI-powered voice companions offer incredible convenience—but they also spark serious privacy questions. As some devices move toward &lt;strong>constantly listening&lt;/strong> microphones for seamless voice assistance, how can they deliver full functionality &lt;strong>and&lt;/strong> protect user privacy? In this post, we dive into current privacy practices in wearables, the legal landscape, technical privacy solutions, consumer sentiment, and best practices for designing privacy-first voice wearables.&lt;/p></description></item><item><title>Voice Analysis for Mental Well-Being and Communication - A Research-Driven Overview</title><link>https://www.midway.club/posts/voice-analysis-mental-health-reseach-overview/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/voice-analysis-mental-health-reseach-overview/</guid><description>&lt;p>Below is a blog post that focuses on the &lt;strong>research-based findings&lt;/strong> regarding continuous voice monitoring for mental health, communication, and relationship insights. It reflects the core research content—how AI-driven speech analysis works, which metrics it targets, and how these insights align with established psychological frameworks.&lt;/p>
 &lt;hr>
 &lt;h2 id="1-ai-and-speech-analysis-in-mental-health">1. AI and Speech Analysis in Mental Health&lt;/h2>
 &lt;p>&lt;strong>Modern mental health professionals&lt;/strong> are increasingly leveraging AI to analyze speech patterns as indicators of well-being. Subtle changes in how we talk—tone, pitch, pace, and language—often signal shifts in mood or mental state. Below are key research insights:&lt;/p></description></item><item><title>What is Midway?</title><link>https://www.midway.club/posts/what-is-midway/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/what-is-midway/</guid><description>&lt;h1 id="conversations-shape-our-lives-midway-makes-them-better">Conversations Shape Our Lives. Midway Makes Them Better.&lt;/h1>
