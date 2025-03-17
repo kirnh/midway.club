@@ -1,7 +1,7 @@
 ---
 date: 2025-03-17
 draft: false
-title: Midway - Elevating Relationship Health
+title: Enriching Every Conversation
 ---
 
 ## Vision
