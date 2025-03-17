@@ -1,10 +1,8 @@
 ---
 date: 2025-03-17
 draft: false
-title: about
+title: Midway - Elevating Relationship Health
 ---
-
-# Midway: Elevating Relationship Health
 
 ## Vision
 We envision a future where wearable microphones seamlessly enrich the fabric of daily interactions, fostering deeper understanding, empathy, and emotional connection in personal relationships. Recognizing that strong, nurturing relationships are at the heart of overall mental well-being, we aim to empower individuals to develop healthier communication habits while preserving the privacy and trust essential for genuine human connection.
