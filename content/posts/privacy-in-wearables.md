@@ -1,6 +1,6 @@
 ---
 date: 2025-03-17
-title: Privacy in Wearable Technologies: Balancing Always‑On Listening with User Trust
+title: Privacy in Wearable Technologies - Balancing Always‑On Listening with User Trust
 ---
 
 Wearable technologies like smartwatches, fitness trackers, smart earbuds, and new AI-powered voice companions offer incredible convenience—but they also spark serious privacy questions. As some devices move toward **constantly listening** microphones for seamless voice assistance, how can they deliver full functionality **and** protect user privacy? In this post, we dive into current privacy practices in wearables, the legal landscape, technical privacy solutions, consumer sentiment, and best practices for designing privacy-first voice wearables.
