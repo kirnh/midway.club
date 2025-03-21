@@ -1,4 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Midway</title><link>https://www.midway.club/posts/</link><description>Recent content in Posts on Midway</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 19 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.midway.club/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Streaming Audio from Raspberry Pi to iPad Over Wi-Fi Using GStreamer</title><link>https://www.midway.club/posts/raspberrypi-ipad-audio-wifi/</link><pubDate>Wed, 19 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/raspberrypi-ipad-audio-wifi/</guid><description>&lt;p>Streaming audio from a Raspberry Pi to an iPad over Wi-Fi allows for a variety of applications, from home intercom systems to real-time monitoring. Since iOS does not support receiving Bluetooth audio directly from external sources, Wi-Fi streaming is the best alternative.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Midway</title><link>https://www.midway.club/posts/</link><description>Recent content in Posts on Midway</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 21 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.midway.club/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Real-Time Speaker Recognition on Raspberry Pi Using SpeechBrain</title><link>https://www.midway.club/posts/speechbrain-speaker-recognition/</link><pubDate>Fri, 21 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/speechbrain-speaker-recognition/</guid><description>&lt;p>This guide demonstrates how to deploy a real-time speaker recognition system on a Raspberry Pi using SpeechBrain&amp;rsquo;s ECAPA-TDNN model. We&amp;rsquo;ll cover model selection, setup, optimization, and deployment for efficient identification.&lt;/p>
+&lt;hr>
+&lt;h2 id="-why-ecapa-tdnn-over-x-vector">🧠 Why ECAPA-TDNN Over x-vector?&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>Feature&lt;/th>
+ &lt;th>x-vector&lt;/th>
+ &lt;th>ECAPA-TDNN&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>Architecture&lt;/td>
+ &lt;td>TDNN&lt;/td>
+ &lt;td>SE-Res2Net + TDNN&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Attention Mechanisms&lt;/td>
+ &lt;td>❌&lt;/td>
+ &lt;td>✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Accuracy&lt;/td>
+ &lt;td>Moderate&lt;/td>
+ &lt;td>High&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Inference Time&lt;/td>
+ &lt;td>Faster&lt;/td>
+ &lt;td>Slightly Slower&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Recommended for RPi&lt;/td>
+ &lt;td>❌&lt;/td>
+ &lt;td>✅ (optimized small variant)&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Conclusion&lt;/strong>: ECAPA-TDNN is more robust and suitable even for embedded systems like Raspberry Pi when optimized properly.&lt;/p></description></item><item><title>Streaming Audio from Raspberry Pi to iPad Over Wi-Fi Using GStreamer</title><link>https://www.midway.club/posts/raspberrypi-ipad-audio-wifi/</link><pubDate>Wed, 19 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/raspberrypi-ipad-audio-wifi/</guid><description>&lt;p>Streaming audio from a Raspberry Pi to an iPad over Wi-Fi allows for a variety of applications, from home intercom systems to real-time monitoring. Since iOS does not support receiving Bluetooth audio directly from external sources, Wi-Fi streaming is the best alternative.&lt;/p>
 &lt;p>In this guide, we&amp;rsquo;ll use &lt;strong>GStreamer&lt;/strong>, a powerful multimedia framework, to capture audio from a microphone connected to the Raspberry Pi and stream it over Wi-Fi. The iPad will then receive and play the stream using an app like &lt;strong>VLC for iOS&lt;/strong>.&lt;/p></description></item><item><title>AI-Powered Voice Companions - Market Research</title><link>https://www.midway.club/posts/ai-powered-voice-companions-market-research/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/ai-powered-voice-companions-market-research/</guid><description>&lt;h2 id="introduction">Introduction&lt;/h2>
 &lt;p>The way we speak can reveal a lot about our mental and emotional health. Subtle vocal cues – from tone and pitch to pace and pauses – often reflect our mood and stress levels [1]. In recent years, artificial intelligence (AI) has begun leveraging these cues in real time to support mental well-being, improve communication, and even coach our relationships. &lt;strong>AI-driven voice companion&lt;/strong> tools are emerging that listen to &lt;strong>how&lt;/strong> we talk (not just &lt;strong>what&lt;/strong> we say) and provide feedback or support. These range from emotion-sensing mental health apps to AI “communication coaches” that analyze tone in conversations.&lt;/p></description></item><item><title>How to Build a Wearable Microphone That Records Only the Speaker for a Full Day</title><link>https://www.midway.club/posts/record-only-speaker/</link><pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/record-only-speaker/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>Creating a &lt;strong>wearable microphone&lt;/strong> that records only the speaker while ensuring a full day&amp;rsquo;s battery life requires a combination of &lt;strong>low-power hardware&lt;/strong>, &lt;strong>smart signal processing&lt;/strong>, and &lt;strong>efficient AI models&lt;/strong>. This guide breaks down the key components and steps to achieve this.&lt;/p>
