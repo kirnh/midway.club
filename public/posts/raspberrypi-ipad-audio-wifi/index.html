@@ -1,0 +1,288 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Streaming Audio from Raspberry Pi to iPad Over Wi-Fi Using GStreamer-Midway</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="Streaming audio from a Raspberry Pi to an iPad over Wi-Fi allows for a variety of applications, from home intercom systems to real-time monitoring. Since iOS does not support receiving Bluetooth audio directly from external sources, Wi-Fi streaming is the best alternative.
+In this guide, we&rsquo;ll use GStreamer, a powerful multimedia framework, to capture audio from a microphone connected to the Raspberry Pi and stream it over Wi-Fi. The iPad will then receive and play the stream using an app like VLC for iOS." />
+  <meta name="author" content="Midway" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+
+  
+
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.145.0">
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://localhost:1313/"
+      >Midway</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/posts/"
+        >Blogs</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      ></nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Streaming Audio from Raspberry Pi to iPad Over Wi-Fi Using GStreamer</h1><div class="text-xs antialiased opacity-60"><time>Mar 19, 2025</time></div></header>
+
+  <section><p>Streaming audio from a Raspberry Pi to an iPad over Wi-Fi allows for a variety of applications, from home intercom systems to real-time monitoring. Since iOS does not support receiving Bluetooth audio directly from external sources, Wi-Fi streaming is the best alternative.</p>
+<p>In this guide, we&rsquo;ll use <strong>GStreamer</strong>, a powerful multimedia framework, to capture audio from a microphone connected to the Raspberry Pi and stream it over Wi-Fi. The iPad will then receive and play the stream using an app like <strong>VLC for iOS</strong>.</p>
+<h2 id="understanding-the-technology"><strong>Understanding the Technology</strong></h2>
+<h3 id="why-not-bluetooth"><strong>Why Not Bluetooth?</strong></h3>
+<p>iOS does not support Bluetooth A2DP Sink mode, meaning it cannot receive audio over Bluetooth like a speaker. Instead, we leverage <strong>Wi-Fi streaming</strong>, which is more flexible and allows better control over audio quality and latency.</p>
+<h3 id="what-is-gstreamer"><strong>What is GStreamer?</strong></h3>
+<p>GStreamer is an open-source multimedia framework that enables processing and streaming of audio and video. It provides an efficient way to capture audio, encode it, and transmit it over a network.</p>
+<h3 id="how-will-this-work"><strong>How Will This Work?</strong></h3>
+<ol>
+<li><strong>Capture audio</strong> from the microphone on the Raspberry Pi.</li>
+<li><strong>Encode the audio</strong> into a format suitable for streaming.</li>
+<li><strong>Stream it over the network</strong> using UDP or HTTP.</li>
+<li><strong>Receive the stream on the iPad</strong> using VLC or another media player.</li>
+</ol>
+<hr>
+<h2 id="step-1-install-gstreamer-on-the-raspberry-pi"><strong>Step 1: Install GStreamer on the Raspberry Pi</strong></h2>
+<p>First, update the Raspberry Pi and install the necessary GStreamer packages:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install -y gstreamer1.0-tools gstreamer1.0-alsa <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    gstreamer1.0-plugins-base gstreamer1.0-plugins-good <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    gstreamer1.0-libav gstreamer1.0-pulseaudio
+</span></span></code></pre></div><p>This installs:</p>
+<ul>
+<li>Core GStreamer tools (<code>gst-launch-1.0</code>)</li>
+<li>Plugins for audio capture, encoding, and streaming</li>
+</ul>
+<h2 id="step-2-identify-your-audio-input-device"><strong>Step 2: Identify Your Audio Input Device</strong></h2>
+<p>To list all connected microphones, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>arecord -l
+</span></span></code></pre></div><p>You should see output like this:</p>
+<pre tabindex="0"><code>**** List of CAPTURE Hardware Devices ****
+card 1: USB-Audio [USB Audio], device 0: USB Audio [USB Audio]
+</code></pre><p>Note the <code>card</code> and <code>device</code> numbers. If your microphone is <code>card 1, device 0</code>, the GStreamer device string will be <code>plughw:1,0</code>.</p>
+<h2 id="step-3-stream-audio-over-wi-fi"><strong>Step 3: Stream Audio Over Wi-Fi</strong></h2>
+<h3 id="option-1-low-latency-udp-streaming-recommended"><strong>Option 1: Low-Latency UDP Streaming (Recommended)</strong></h3>
+<p>UDP streaming has lower latency and is ideal for real-time audio applications.</p>
+<h4 id="on-the-raspberry-pi-sender"><strong>On the Raspberry Pi (Sender):</strong></h4>
+<p>Run the following command to start streaming audio with optimized noise reduction:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gst-launch-1.0 alsasrc device<span style="color:#f92672">=</span>plughw:1,0 buffer-time<span style="color:#f92672">=</span><span style="color:#ae81ff">100000</span> ! <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    audioconvert ! <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    audioresample quality<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span> ! <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    audio/x-raw,rate<span style="color:#f92672">=</span>44100,channels<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ! <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    rtpL16pay ! <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    udpsink host<span style="color:#f92672">=</span>&lt;ipad-ip&gt; port<span style="color:#f92672">=</span><span style="color:#ae81ff">5004</span> buffer-size<span style="color:#f92672">=</span><span style="color:#ae81ff">65536</span>
+</span></span></code></pre></div><p>Replace <code>&lt;ipad-ip&gt;</code> with the actual IP address of your iPad.</p>
+<h4 id="on-the-ipad-receiver"><strong>On the iPad (Receiver):</strong></h4>
+<ol>
+<li>Install <strong>VLC for iOS</strong> from the App Store.</li>
+<li>Open VLC and go to <code>Network Stream</code>.</li>
+<li>Enter:
+<pre tabindex="0"><code>rtp://@:5004
+</code></pre></li>
+<li>Tap <strong>Play</strong> to start listening.</li>
+</ol>
+<h3 id="option-2-http-mp3-streaming-more-compatible"><strong>Option 2: HTTP MP3 Streaming (More Compatible)</strong></h3>
+<p>MP3 streaming over HTTP introduces more latency (1-3 seconds) but is easier to access in Safari or VLC.</p>
+<h4 id="on-the-raspberry-pi-sender-1"><strong>On the Raspberry Pi (Sender):</strong></h4>
+<p>Run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gst-launch-1.0 -v alsasrc device<span style="color:#f92672">=</span>plughw:1,0 ! audioconvert ! lamemp3enc ! <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    mpegaudioparse ! shout2send ip<span style="color:#f92672">=</span>&lt;raspberry-pi-ip&gt; port<span style="color:#f92672">=</span><span style="color:#ae81ff">8000</span> password<span style="color:#f92672">=</span>hackme mount<span style="color:#f92672">=</span>/stream.mp3
+</span></span></code></pre></div><h4 id="on-the-ipad-receiver-1"><strong>On the iPad (Receiver):</strong></h4>
+<ol>
+<li>Open Safari or VLC for iOS.</li>
+<li>Enter the following URL:
+<pre tabindex="0"><code>http://&lt;raspberry-pi-ip&gt;:8000/stream.mp3
+</code></pre></li>
+<li>Press <strong>Play</strong>.</li>
+</ol>
+<hr>
+<h2 id="step-4-find-your-ipads-ip-address"><strong>Step 4: Find Your iPad’s IP Address</strong></h2>
+<p>Before running the streaming commands, you need to find your iPad’s IP address.</p>
+<h3 id="method-1-check-in-ipad-settings"><strong>Method 1: Check in iPad Settings</strong></h3>
+<ol>
+<li>Open <strong>Settings</strong> &gt; <strong>Wi-Fi</strong>.</li>
+<li>Tap the <code>(i)</code> button next to your connected Wi-Fi network.</li>
+<li>Find <strong>IP Address</strong> (e.g., <code>192.168.1.102</code>).</li>
+</ol>
+<h3 id="method-2-scan-the-network-from-raspberry-pi"><strong>Method 2: Scan the Network from Raspberry Pi</strong></h3>
+<p>If you want to find all devices on the network:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install arp-scan
+</span></span><span style="display:flex;"><span>sudo arp-scan --localnet
+</span></span></code></pre></div><p>Look for an entry with <strong>Apple</strong> in the manufacturer column.</p>
+<hr>
+<h2 id="step-5-optimize-for-lower-latency"><strong>Step 5: Optimize for Lower Latency</strong></h2>
+<ul>
+<li>Reduce buffering in GStreamer by setting <code>buffer-time=100000</code> in the pipeline.</li>
+<li>Use UDP (<code>udpsink</code>) instead of HTTP (<code>shout2send</code>) for real-time streaming.</li>
+<li>Ensure both devices are on the same Wi-Fi network and avoid interference.</li>
+</ul>
+<hr>
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+<p>Using <strong>GStreamer</strong>, we successfully streamed live microphone audio from a Raspberry Pi to an iPad over Wi-Fi. This setup works for real-time intercoms, remote monitoring, or simply experimenting with audio transmission over a network.</p>
+<h3 id="comparison-of-methods"><strong>Comparison of Methods</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>Method</th>
+          <th>Latency</th>
+          <th>URL for iPad</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>UDP (RTP)</strong></td>
+          <td>Very Low (&lt;1 sec)</td>
+          <td><code>rtp://@:5004</code> (VLC)</td>
+      </tr>
+      <tr>
+          <td><strong>HTTP (MP3)</strong></td>
+          <td>Medium (1-3 sec)</td>
+          <td><code>http://&lt;raspberrypi-ip&gt;:8000/stream.mp3</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>If low latency is important, <strong>use UDP streaming with VLC</strong>. If you need a more general-purpose solution, <strong>MP3 over HTTP is easier</strong> to access in Safari or other media players.</p>
+<p>Happy Streaming! 🚀</p>
+</section>
+
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/posts/speechbrain-speaker-recognition/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Real-Time Speaker Recognition on Raspberry Pi with SpeechBrain</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="http://localhost:1313/posts/ai-powered-voice-companions-market-research/"
+      ><span>AI-Powered Voice Companions - Market Research</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/">Midway</a></div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

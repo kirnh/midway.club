@@ -1,0 +1,302 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Training TinyML Speaker Recognition Model for Deployment on Raspberry Pi-Midway</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="Introduction
+Speaker recognition on low-power devices is a challenge, but with TinyML, we can build a lightweight model that runs efficiently on a Raspberry Pi 4. Since training requires more computational power, we will use a Cloud GPU to train the model and deploy the optimized version on the Raspberry Pi for real-time inference.
+
+1. Audio Preprocessing (Feature Extraction)
+To recognize a speaker in real-time, we extract key features from audio. The best method for TinyML is Mel-Frequency Cepstral Coefficients (MFCCs)." />
+  <meta name="author" content="Midway" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+
+  
+
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.145.0">
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://localhost:1313/"
+      >Midway</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/posts/"
+        >Blogs</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      ></nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Training TinyML Speaker Recognition Model for Deployment on Raspberry Pi</h1><div class="text-xs antialiased opacity-60"><time>Mar 17, 2025</time></div></header>
+
+  <section><h2 id="introduction"><strong>Introduction</strong></h2>
+<p>Speaker recognition on low-power devices is a challenge, but with <strong>TinyML</strong>, we can build a lightweight model that runs efficiently on a <strong>Raspberry Pi 4</strong>. Since training requires more computational power, we will use a <strong>Cloud GPU</strong> to train the model and deploy the optimized version on the Raspberry Pi for real-time inference.</p>
+<hr>
+<h2 id="1-audio-preprocessing-feature-extraction"><strong>1. Audio Preprocessing (Feature Extraction)</strong></h2>
+<p>To recognize a speaker in real-time, we extract key features from audio. The best method for TinyML is <strong>Mel-Frequency Cepstral Coefficients (MFCCs)</strong>.</p>
+<h3 id="extracting-mfccs-in-python"><strong>Extracting MFCCs in Python</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> librosa
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> librosa.display
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load an audio file (recorded from your microphone)</span>
+</span></span><span style="display:flex;"><span>audio_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;speaker1.wav&#34;</span>
+</span></span><span style="display:flex;"><span>y, sr <span style="color:#f92672">=</span> librosa<span style="color:#f92672">.</span>load(audio_file, sr<span style="color:#f92672">=</span><span style="color:#ae81ff">16000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Extract MFCC features</span>
+</span></span><span style="display:flex;"><span>mfccs <span style="color:#f92672">=</span> librosa<span style="color:#f92672">.</span>feature<span style="color:#f92672">.</span>mfcc(y<span style="color:#f92672">=</span>y, sr<span style="color:#f92672">=</span>sr, n_mfcc<span style="color:#f92672">=</span><span style="color:#ae81ff">13</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display MFCCs</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>librosa<span style="color:#f92672">.</span>display<span style="color:#f92672">.</span>specshow(mfccs, x_axis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;time&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>colorbar()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;MFCCs&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>👉 <strong>These MFCCs will be used as input to our model.</strong></p>
+<hr>
+<h2 id="2-training-a-tinyml-speaker-model-on-cloud-gpu"><strong>2. Training a TinyML Speaker Model on Cloud GPU</strong></h2>
+<p>Since training deep learning models on a Raspberry Pi is inefficient, we will use a <strong>Cloud GPU</strong> (e.g., Google Colab, AWS EC2, or Azure ML) for model training.</p>
+<h3 id="dataset-requirements"><strong>Dataset Requirements</strong></h3>
+<ul>
+<li><strong>At least 5 minutes of speech per speaker</strong></li>
+<li><strong>Multiple speakers for training</strong></li>
+<li><strong>Use VoxCeleb dataset or record your own</strong></li>
+</ul>
+<h3 id="training-a-lightweight-model-in-tensorflow-on-cloud-gpu"><strong>Training a Lightweight Model in TensorFlow on Cloud GPU</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dense, Flatten, Conv2D, MaxPooling2D
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.utils <span style="color:#f92672">import</span> to_categorical
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Normalize data</span>
+</span></span><span style="display:flex;"><span>X_train <span style="color:#f92672">=</span> X_train <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>max(X_train)
+</span></span><span style="display:flex;"><span>X_test <span style="color:#f92672">=</span> X_test <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>max(X_test)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert labels to categorical</span>
+</span></span><span style="display:flex;"><span>y_train <span style="color:#f92672">=</span> to_categorical(y_train, num_classes<span style="color:#f92672">=</span>num_speakers)
+</span></span><span style="display:flex;"><span>y_test <span style="color:#f92672">=</span> to_categorical(y_test, num_classes<span style="color:#f92672">=</span>num_speakers)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build TinyML Model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>    Conv2D(<span style="color:#ae81ff">8</span>, kernel_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1</span>)),
+</span></span><span style="display:flex;"><span>    MaxPooling2D(pool_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>)),
+</span></span><span style="display:flex;"><span>    Flatten(),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">16</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),
+</span></span><span style="display:flex;"><span>    Dense(num_speakers, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)  <span style="color:#75715e"># Output layer</span>
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train model on Cloud GPU</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, validation_data<span style="color:#f92672">=</span>(X_test, y_test))
+</span></span></code></pre></div><hr>
+<h2 id="3-optimizing-the-model-for-tinyml"><strong>3. Optimizing the Model for TinyML</strong></h2>
+<p>Once training is complete on the cloud, we need to <strong>convert the model to TensorFlow Lite</strong> for deployment on Raspberry Pi 4.</p>
+<h3 id="convert-to-tensorflow-lite"><strong>Convert to TensorFlow Lite</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>converter <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>lite<span style="color:#f92672">.</span>TFLiteConverter<span style="color:#f92672">.</span>from_keras_model(model)
+</span></span><span style="display:flex;"><span>converter<span style="color:#f92672">.</span>optimizations <span style="color:#f92672">=</span> [tf<span style="color:#f92672">.</span>lite<span style="color:#f92672">.</span>Optimize<span style="color:#f92672">.</span>DEFAULT]
+</span></span><span style="display:flex;"><span>tflite_model <span style="color:#f92672">=</span> converter<span style="color:#f92672">.</span>convert()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save model</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;speaker_model.tflite&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(tflite_model)
+</span></span></code></pre></div><p>This <strong>quantizes</strong> the model, making it smaller and faster for inference on the Raspberry Pi.</p>
+<hr>
+<h2 id="4-deploying-the-model-on-raspberry-pi-4"><strong>4. Deploying the Model on Raspberry Pi 4</strong></h2>
+<h3 id="transfer-model-to-raspberry-pi"><strong>Transfer Model to Raspberry Pi</strong></h3>
+<p>Use <strong>SCP or a cloud storage service</strong> to transfer the trained <code>.tflite</code> model to Raspberry Pi.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>scp speaker_model.tflite pi@raspberrypi:/home/pi/
+</span></span></code></pre></div><h3 id="install-tensorflow-lite-interpreter-on-raspberry-pi"><strong>Install TensorFlow Lite Interpreter on Raspberry Pi</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pip install tflite-runtime
+</span></span></code></pre></div><h3 id="run-real-time-speaker-recognition"><strong>Run Real-Time Speaker Recognition</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tflite_runtime.interpreter <span style="color:#66d9ef">as</span> tflite
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load model</span>
+</span></span><span style="display:flex;"><span>interpreter <span style="color:#f92672">=</span> tflite<span style="color:#f92672">.</span>Interpreter(model_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;speaker_model.tflite&#34;</span>)
+</span></span><span style="display:flex;"><span>interpreter<span style="color:#f92672">.</span>allocate_tensors()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get input/output tensors</span>
+</span></span><span style="display:flex;"><span>input_details <span style="color:#f92672">=</span> interpreter<span style="color:#f92672">.</span>get_input_details()
+</span></span><span style="display:flex;"><span>output_details <span style="color:#f92672">=</span> interpreter<span style="color:#f92672">.</span>get_output_details()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to predict speaker</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">predict_speaker</span>(mfcc_features):
+</span></span><span style="display:flex;"><span>    mfcc_features <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>expand_dims(mfcc_features, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Set input tensor</span>
+</span></span><span style="display:flex;"><span>    interpreter<span style="color:#f92672">.</span>set_tensor(input_details[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;index&#39;</span>], mfcc_features)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Run inference</span>
+</span></span><span style="display:flex;"><span>    interpreter<span style="color:#f92672">.</span>invoke()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get output</span>
+</span></span><span style="display:flex;"><span>    output_data <span style="color:#f92672">=</span> interpreter<span style="color:#f92672">.</span>get_tensor(output_details[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;index&#39;</span>])
+</span></span><span style="display:flex;"><span>    predicted_speaker <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(output_data)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> predicted_speaker
+</span></span></code></pre></div><hr>
+<h2 id="5-is-raspberry-pi-4-enough-for-real-time-speaker-recognition"><strong>5. Is Raspberry Pi 4 Enough for Real-Time Speaker Recognition?</strong></h2>
+<p>✅ <strong>Yes</strong>, if:</p>
+<ul>
+<li>Using <strong>TensorFlow Lite</strong> with optimized <strong>MFCC-based models</strong>.</li>
+<li>Inference time is <strong>10-20ms per prediction</strong>.</li>
+<li>Handling up to <strong>5-10 speakers</strong>.</li>
+</ul>
+<p>🚫 <strong>No</strong>, if:</p>
+<ul>
+<li>Using <strong>deep models like wav2vec</strong> (requires GPU or Edge TPU).</li>
+<li>Need <strong>continuous real-time classification</strong> on large datasets.</li>
+</ul>
+<hr>
+<h2 id="6-next-steps"><strong>6. Next Steps</strong></h2>
+<ul>
+<li><strong>Test latency</strong> on Raspberry Pi with real microphone input.</li>
+<li><strong>Optimize model further</strong> using <strong>TensorFlow Model Optimization Toolkit</strong>.</li>
+<li><strong>Use Edge TPU (Coral) for better performance</strong> if needed.</li>
+</ul>
+<p>By leveraging <strong>Cloud GPU for training</strong> and deploying <strong>optimized models on Raspberry Pi</strong>, we can achieve real-time speaker recognition with <strong>high efficiency</strong>! 🎤🚀</p>
+</section>
+
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/posts/privacy-in-wearables/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Privacy in Wearable Technologies - Balancing Always‑On Listening with User Trust</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="http://localhost:1313/posts/voice-analysis-mental-health-reseach-overview/"
+      ><span>Voice Analysis for Mental Well-Being and Communication - A Research-Driven Overview</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/">Midway</a></div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

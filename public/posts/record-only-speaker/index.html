@@ -1,0 +1,429 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>How to Build a Wearable Microphone That Records Only the Speaker for a Full Day-Midway</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="Overview
+Creating a wearable microphone that records only the speaker while ensuring a full day&rsquo;s battery life requires a combination of low-power hardware, smart signal processing, and efficient AI models. This guide breaks down the key components and steps to achieve this.
+1. Hardware Requirements
+Microphone Selection
+
+MEMS Microphone (e.g., Knowles SPH0645LM4H-B) for power efficiency.
+Directional Microphone to focus on the speaker and reduce background noise.
+Bone Conduction Mic (e.g., Vesper VM2020) for extreme noise resistance.
+
+Processing Unit
+
+Low-power DSP (Digital Signal Processor) (e.g., Qualcomm QCC5141, Ambiq Apollo4)
+MCU with Edge AI Support (e.g., ESP32-S3, Raspberry Pi RP2040 with TinyML)
+
+Battery &amp; Power Optimization
+
+1000mAh Li-Po Battery for extended life.
+Efficient Power Management IC (PMIC) (e.g., Texas Instruments BQ24074).
+Low-Power Sleep Mode when not in active recording.
+
+2. AI-Based Speaker Recognition
+Feature Extraction
+
+Use MFCCs (Mel-Frequency Cepstral Coefficients) or wav2vec embeddings for voice signatures.
+
+On-Device Speaker Identification
+
+Lightweight TinyML Model trained on the speaker’s voice.
+Wake-word detection to trigger recording only when the speaker talks.
+
+Noise Filtering
+
+Beamforming Algorithms (e.g., Superdirective Beamforming) to isolate the speaker’s voice.
+Adaptive Noise Cancellation (ANC) using DSP.
+
+3. Storage &amp; Data Transmission
+Storage Options
+
+Local Storage (microSD or Flash Memory) for offline recording.
+Compressed Audio (AAC or Opus format) for minimal space usage.
+
+Transmission
+
+Bluetooth Low Energy (BLE) for short bursts of audio transmission.
+Wi-Fi or LTE Module (optional) for cloud backup when needed.
+
+4. Wearable Design Considerations
+
+Form Factor: Necklace, clip-on, or integrated into clothing.
+Weight: Less than 50g for comfort.
+Heat Dissipation: Ensure efficient power use to prevent overheating.
+
+5. Software &amp; Model Deployment
+
+Embedded Firmware: TinyML model deployment with TensorFlow Lite.
+Mobile App: Optional app for adjusting settings and reviewing recordings.
+OTA Updates: To improve AI models over time.
+
+6. Expected Battery Life Estimation
+
+  
+      
+          Component
+          Power Consumption
+          Estimated Usage Time
+      
+  
+  
+      
+          MEMS Microphone
+          ~0.5mW
+          Negligible impact
+      
+      
+          DSP Processing
+          ~10mW
+          ~100 hours
+      
+      
+          BLE Transmission
+          ~15mW (intermittent)
+          ~24&#43; hours
+      
+      
+          Flash Storage Write
+          ~20mW
+          ~50 hours
+      
+      
+          Total Estimated Power Draw
+          ~30mW average
+          24&#43; hours
+      
+  
+
+7. Challenges &amp; Solutions
+
+  
+      
+          Challenge
+          Solution
+      
+  
+  
+      
+          High background noise
+          Use beamforming &#43; bone conduction mic
+      
+      
+          Battery drain
+          Optimize DSP power usage &amp; sleep mode
+      
+      
+          Processing on-device
+          Use TinyML with quantized models
+      
+      
+          Privacy concerns
+          Store locally, encrypt data
+      
+  
+
+8. Next Steps
+
+Prototype with ESP32-S3 &#43; MEMS Mic &#43; BLE.
+Train a TinyML speaker model.
+Optimize power consumption with PMIC.
+Test real-world performance with various noise environments.
+
+With the right optimizations, this wearable speaker-specific microphone can last a full day while recording only the intended speaker!" />
+  <meta name="author" content="Midway" /><link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+
+  
+
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.145.0">
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://localhost:1313/"
+      >Midway</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/posts/"
+        >Blogs</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      ></nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">How to Build a Wearable Microphone That Records Only the Speaker for a Full Day</h1><div class="text-xs antialiased opacity-60"><time>Mar 17, 2025</time></div></header>
+
+  <section><h2 id="overview">Overview</h2>
+<p>Creating a <strong>wearable microphone</strong> that records only the speaker while ensuring a full day&rsquo;s battery life requires a combination of <strong>low-power hardware</strong>, <strong>smart signal processing</strong>, and <strong>efficient AI models</strong>. This guide breaks down the key components and steps to achieve this.</p>
+<h2 id="1-hardware-requirements">1. Hardware Requirements</h2>
+<h3 id="microphone-selection"><strong>Microphone Selection</strong></h3>
+<ul>
+<li><strong>MEMS Microphone</strong> (e.g., Knowles SPH0645LM4H-B) for power efficiency.</li>
+<li><strong>Directional Microphone</strong> to focus on the speaker and reduce background noise.</li>
+<li><strong>Bone Conduction Mic</strong> (e.g., Vesper VM2020) for extreme noise resistance.</li>
+</ul>
+<h3 id="processing-unit"><strong>Processing Unit</strong></h3>
+<ul>
+<li><strong>Low-power DSP (Digital Signal Processor)</strong> (e.g., Qualcomm QCC5141, Ambiq Apollo4)</li>
+<li><strong>MCU with Edge AI Support</strong> (e.g., ESP32-S3, Raspberry Pi RP2040 with TinyML)</li>
+</ul>
+<h3 id="battery--power-optimization"><strong>Battery &amp; Power Optimization</strong></h3>
+<ul>
+<li><strong>1000mAh Li-Po Battery</strong> for extended life.</li>
+<li><strong>Efficient Power Management IC (PMIC)</strong> (e.g., Texas Instruments BQ24074).</li>
+<li><strong>Low-Power Sleep Mode</strong> when not in active recording.</li>
+</ul>
+<h2 id="2-ai-based-speaker-recognition">2. AI-Based Speaker Recognition</h2>
+<h3 id="feature-extraction"><strong>Feature Extraction</strong></h3>
+<ul>
+<li>Use <strong>MFCCs (Mel-Frequency Cepstral Coefficients)</strong> or <strong>wav2vec embeddings</strong> for voice signatures.</li>
+</ul>
+<h3 id="on-device-speaker-identification"><strong>On-Device Speaker Identification</strong></h3>
+<ul>
+<li><strong>Lightweight TinyML Model</strong> trained on the speaker’s voice.</li>
+<li><strong>Wake-word detection</strong> to trigger recording only when the speaker talks.</li>
+</ul>
+<h3 id="noise-filtering"><strong>Noise Filtering</strong></h3>
+<ul>
+<li><strong>Beamforming Algorithms</strong> (e.g., Superdirective Beamforming) to isolate the speaker’s voice.</li>
+<li><strong>Adaptive Noise Cancellation (ANC)</strong> using DSP.</li>
+</ul>
+<h2 id="3-storage--data-transmission">3. Storage &amp; Data Transmission</h2>
+<h3 id="storage-options"><strong>Storage Options</strong></h3>
+<ul>
+<li><strong>Local Storage (microSD or Flash Memory)</strong> for offline recording.</li>
+<li><strong>Compressed Audio (AAC or Opus format)</strong> for minimal space usage.</li>
+</ul>
+<h3 id="transmission"><strong>Transmission</strong></h3>
+<ul>
+<li><strong>Bluetooth Low Energy (BLE)</strong> for short bursts of audio transmission.</li>
+<li><strong>Wi-Fi or LTE Module</strong> (optional) for cloud backup when needed.</li>
+</ul>
+<h2 id="4-wearable-design-considerations">4. Wearable Design Considerations</h2>
+<ul>
+<li><strong>Form Factor:</strong> Necklace, clip-on, or integrated into clothing.</li>
+<li><strong>Weight:</strong> Less than 50g for comfort.</li>
+<li><strong>Heat Dissipation:</strong> Ensure efficient power use to prevent overheating.</li>
+</ul>
+<h2 id="5-software--model-deployment">5. Software &amp; Model Deployment</h2>
+<ul>
+<li><strong>Embedded Firmware:</strong> TinyML model deployment with TensorFlow Lite.</li>
+<li><strong>Mobile App:</strong> Optional app for adjusting settings and reviewing recordings.</li>
+<li><strong>OTA Updates:</strong> To improve AI models over time.</li>
+</ul>
+<h2 id="6-expected-battery-life-estimation">6. Expected Battery Life Estimation</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Component</th>
+          <th>Power Consumption</th>
+          <th>Estimated Usage Time</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>MEMS Microphone</td>
+          <td>~0.5mW</td>
+          <td>Negligible impact</td>
+      </tr>
+      <tr>
+          <td>DSP Processing</td>
+          <td>~10mW</td>
+          <td>~100 hours</td>
+      </tr>
+      <tr>
+          <td>BLE Transmission</td>
+          <td>~15mW (intermittent)</td>
+          <td>~24+ hours</td>
+      </tr>
+      <tr>
+          <td>Flash Storage Write</td>
+          <td>~20mW</td>
+          <td>~50 hours</td>
+      </tr>
+      <tr>
+          <td>Total Estimated Power Draw</td>
+          <td>~30mW average</td>
+          <td><strong>24+ hours</strong></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="7-challenges--solutions">7. Challenges &amp; Solutions</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge</th>
+          <th>Solution</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>High background noise</td>
+          <td>Use beamforming + bone conduction mic</td>
+      </tr>
+      <tr>
+          <td>Battery drain</td>
+          <td>Optimize DSP power usage &amp; sleep mode</td>
+      </tr>
+      <tr>
+          <td>Processing on-device</td>
+          <td>Use TinyML with quantized models</td>
+      </tr>
+      <tr>
+          <td>Privacy concerns</td>
+          <td>Store locally, encrypt data</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="8-next-steps">8. Next Steps</h2>
+<ul>
+<li>Prototype with ESP32-S3 + MEMS Mic + BLE.</li>
+<li>Train a TinyML speaker model.</li>
+<li>Optimize power consumption with PMIC.</li>
+<li>Test real-world performance with various noise environments.</li>
+</ul>
+<p>With the right optimizations, this <strong>wearable speaker-specific microphone</strong> can last a full day while recording only the intended speaker!</p>
+</section>
+
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/posts/ai-powered-voice-companions-market-research/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>AI-Powered Voice Companions - Market Research</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="http://localhost:1313/posts/privacy-in-wearables/"
+      ><span>Privacy in Wearable Technologies - Balancing Always‑On Listening with User Trust</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">&copy;2025<a class="link" href="http://localhost:1313/">Midway</a></div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>
