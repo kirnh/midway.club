@@ -1,4 +1,47 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introducing Midway! on Midway</title><link>https://www.midway.club/</link><description>Recent content in Introducing Midway! on Midway</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 21 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.midway.club/index.xml" rel="self" type="application/rss+xml"/><item><title>Real-Time Speaker Recognition on Raspberry Pi Using SpeechBrain</title><link>https://www.midway.club/posts/speechbrain-speaker-recognition/</link><pubDate>Fri, 21 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/speechbrain-speaker-recognition/</guid><description>&lt;p>This guide demonstrates how to deploy a real-time speaker recognition system on a Raspberry Pi using SpeechBrain&amp;rsquo;s ECAPA-TDNN model. We&amp;rsquo;ll cover model selection, setup, optimization, and deployment for efficient identification.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introducing Midway! on Midway</title><link>https://www.midway.club/</link><description>Recent content in Introducing Midway! on Midway</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 28 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.midway.club/index.xml" rel="self" type="application/rss+xml"/><item><title>🧠 Real-Time Voice Activity Detection on Raspberry Pi with Silero VAD</title><link>https://www.midway.club/posts/voice-activity-detector/</link><pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/voice-activity-detector/</guid><description>&lt;p>In this guide, we implement &lt;strong>real-time voice activity detection (VAD)&lt;/strong> on a Raspberry Pi using the open-source &lt;a href="https://github.com/snakers4/silero-vad">Silero VAD&lt;/a> model. This allows us to listen continuously and trigger further actions &lt;strong>only when human speech is detected&lt;/strong>, even in noisy environments.&lt;/p>
+&lt;hr>
+&lt;h2 id="-why-real-time-vad-matters">🔥 Why Real-Time VAD Matters&lt;/h2>
+&lt;p>When building smart voice systems, it&amp;rsquo;s wasteful (and error-prone) to analyze audio all the time. We want to:&lt;/p>
+&lt;ul>
+&lt;li>✅ Detect when someone is &lt;strong>actually speaking&lt;/strong>&lt;/li>
+&lt;li>❌ Ignore background noise, silence, fans, dogs barking, etc.&lt;/li>
+&lt;li>✅ Trigger speaker recognition or transcription &lt;strong>only when voice is present&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="-what-well-use">🛠️ What We’ll Use&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>Component&lt;/th>
+ &lt;th>Purpose&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;code>arecord&lt;/code>&lt;/td>
+ &lt;td>Efficient audio capture on RPi&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>torchaudio&lt;/code>&lt;/td>
+ &lt;td>WAV file loading&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>silero-vad&lt;/code>&lt;/td>
+ &lt;td>Tiny PyTorch-based voice detector&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Raspberry Pi&lt;/td>
+ &lt;td>Edge device to run everything locally&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="-setup">⚙️ Setup&lt;/h2>
+&lt;h3 id="install-dependencies">Install Dependencies&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pip install torchaudio soundfile silero-vad
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install sox alsa-utils
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>✅ Tip: Make sure your microphone shows up in &lt;code>arecord -l&lt;/code>. Use the correct device name (e.g. &lt;code>plughw:1,0&lt;/code>).&lt;/p></description></item><item><title>Real-Time Speaker Recognition on Raspberry Pi Using SpeechBrain</title><link>https://www.midway.club/posts/speechbrain-speaker-recognition/</link><pubDate>Fri, 21 Mar 2025 00:00:00 +0000</pubDate><guid>https://www.midway.club/posts/speechbrain-speaker-recognition/</guid><description>&lt;p>This guide demonstrates how to deploy a real-time speaker recognition system on a Raspberry Pi using SpeechBrain&amp;rsquo;s ECAPA-TDNN model. We&amp;rsquo;ll cover model selection, setup, optimization, and deployment for efficient identification.&lt;/p>
 &lt;hr>
 &lt;h2 id="-why-ecapa-tdnn-over-x-vector">🧠 Why ECAPA-TDNN Over x-vector?&lt;/h2>
 &lt;table>

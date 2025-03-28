@@ -1,0 +1,119 @@
+<!doctype html><html class="not-ready lg:text-base" style=--bg:#faf8f1 lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>🧠 Real-Time Voice Activity Detection on Raspberry Pi with Silero VAD-Midway</title>
+<meta name=theme-color><meta name=description content="In this guide, we implement real-time voice activity detection (VAD) on a Raspberry Pi using the open-source Silero VAD model. This allows us to listen continuously and trigger further actions only when human speech is detected, even in noisy environments.
+
+🔥 Why Real-Time VAD Matters
+When building smart voice systems, it&rsquo;s wasteful (and error-prone) to analyze audio all the time. We want to:
+
+✅ Detect when someone is actually speaking
+❌ Ignore background noise, silence, fans, dogs barking, etc.
+✅ Trigger speaker recognition or transcription only when voice is present
+
+
+🛠️ What We’ll Use
+
+  
+      
+          Component
+          Purpose
+      
+  
+  
+      
+          arecord
+          Efficient audio capture on RPi
+      
+      
+          torchaudio
+          WAV file loading
+      
+      
+          silero-vad
+          Tiny PyTorch-based voice detector
+      
+      
+          Raspberry Pi
+          Edge device to run everything locally
+      
+  
+
+
+⚙️ Setup
+Install Dependencies
+pip install torchaudio soundfile silero-vad
+sudo apt install sox alsa-utils
+
+✅ Tip: Make sure your microphone shows up in arecord -l. Use the correct device name (e.g. plughw:1,0)."><meta name=author content="Midway"><link rel="preload stylesheet" as=style href=https://www.midway.club/main.min.css><link rel=preload as=image href=https://www.midway.club/theme.png><script defer src=https://www.midway.club/highlight.min.js onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://www.midway.club/favicon.ico><link rel=apple-touch-icon href=https://www.midway.club/apple-touch-icon.png><meta name=generator content="Hugo 0.145.0"><meta itemprop=name content="🧠 Real-Time Voice Activity Detection on Raspberry Pi with Silero VAD"><meta itemprop=description content="In this guide, we implement real-time voice activity detection (VAD) on a Raspberry Pi using the open-source Silero VAD model. This allows us to listen continuously and trigger further actions only when human speech is detected, even in noisy environments.
+🔥 Why Real-Time VAD Matters When building smart voice systems, it’s wasteful (and error-prone) to analyze audio all the time. We want to:
+✅ Detect when someone is actually speaking ❌ Ignore background noise, silence, fans, dogs barking, etc. ✅ Trigger speaker recognition or transcription only when voice is present 🛠️ What We’ll Use Component Purpose arecord Efficient audio capture on RPi torchaudio WAV file loading silero-vad Tiny PyTorch-based voice detector Raspberry Pi Edge device to run everything locally ⚙️ Setup Install Dependencies pip install torchaudio soundfile silero-vad sudo apt install sox alsa-utils ✅ Tip: Make sure your microphone shows up in arecord -l. Use the correct device name (e.g. plughw:1,0)."><meta itemprop=datePublished content="2025-03-28T00:00:00+00:00"><meta itemprop=dateModified content="2025-03-28T00:00:00+00:00"><meta itemprop=wordCount content="490"><meta property="og:url" content="https://www.midway.club/posts/voice-activity-detector/"><meta property="og:site_name" content="Midway"><meta property="og:title" content="🧠 Real-Time Voice Activity Detection on Raspberry Pi with Silero VAD"><meta property="og:description" content="In this guide, we implement real-time voice activity detection (VAD) on a Raspberry Pi using the open-source Silero VAD model. This allows us to listen continuously and trigger further actions only when human speech is detected, even in noisy environments.
+🔥 Why Real-Time VAD Matters When building smart voice systems, it’s wasteful (and error-prone) to analyze audio all the time. We want to:
+✅ Detect when someone is actually speaking ❌ Ignore background noise, silence, fans, dogs barking, etc. ✅ Trigger speaker recognition or transcription only when voice is present 🛠️ What We’ll Use Component Purpose arecord Efficient audio capture on RPi torchaudio WAV file loading silero-vad Tiny PyTorch-based voice detector Raspberry Pi Edge device to run everything locally ⚙️ Setup Install Dependencies pip install torchaudio soundfile silero-vad sudo apt install sox alsa-utils ✅ Tip: Make sure your microphone shows up in arecord -l. Use the correct device name (e.g. plughw:1,0)."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-03-28T00:00:00+00:00"><meta property="article:modified_time" content="2025-03-28T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="🧠 Real-Time Voice Activity Detection on Raspberry Pi with Silero VAD"><meta name=twitter:description content="In this guide, we implement real-time voice activity detection (VAD) on a Raspberry Pi using the open-source Silero VAD model. This allows us to listen continuously and trigger further actions only when human speech is detected, even in noisy environments.
+🔥 Why Real-Time VAD Matters When building smart voice systems, it’s wasteful (and error-prone) to analyze audio all the time. We want to:
+✅ Detect when someone is actually speaking ❌ Ignore background noise, silence, fans, dogs barking, etc. ✅ Trigger speaker recognition or transcription only when voice is present 🛠️ What We’ll Use Component Purpose arecord Efficient audio capture on RPi torchaudio WAV file loading silero-vad Tiny PyTorch-based voice detector Raspberry Pi Edge device to run everything locally ⚙️ Setup Install Dependencies pip install torchaudio soundfile silero-vad sudo apt install sox alsa-utils ✅ Tip: Make sure your microphone shows up in arecord -l. Use the correct device name (e.g. plughw:1,0)."><link rel=canonical href=https://www.midway.club/posts/voice-activity-detector/></head><body class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"><header class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"><div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto"><a class="-translate-y-[1px] text-2xl font-medium" href=https://www.midway.club/>Midway</a><div class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]" role=button aria-label=Dark></div></div><div class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8" role=button aria-label=Menu></div><script>const htmlClass=document.documentElement.classList;setTimeout(()=>{htmlClass.remove("not-ready")},10);const btnMenu=document.querySelector(".btn-menu");btnMenu.addEventListener("click",()=>{htmlClass.toggle("open")});const metaTheme=document.querySelector('meta[name="theme-color"]'),lightBg="#faf8f1".replace(/"/g,""),setDark=e=>{metaTheme.setAttribute("content",e?"#000":lightBg),htmlClass[e?"add":"remove"]("dark"),localStorage.setItem("dark",e)},darkScheme=window.matchMedia("(prefers-color-scheme: dark)");if(htmlClass.contains("dark"))setDark(!0);else{const e=localStorage.getItem("dark");setDark(e?e==="true":darkScheme.matches)}darkScheme.addEventListener("change",e=>{setDark(e.matches)});const btnDark=document.querySelector(".btn-dark");btnDark.addEventListener("click",()=>{setDark(localStorage.getItem("dark")!=="true")})</script><div class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"><nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=/posts/>Blogs</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=/about/>About</a></nav></div></header><main class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"><article><header class=mb-14><h1 class="my-0! pb-2.5">🧠 Real-Time Voice Activity Detection on Raspberry Pi with Silero VAD</h1><div class="text-xs antialiased opacity-60"><time>Mar 28, 2025</time></div></header><section><p>In this guide, we implement <strong>real-time voice activity detection (VAD)</strong> on a Raspberry Pi using the open-source <a href=https://github.com/snakers4/silero-vad>Silero VAD</a> model. This allows us to listen continuously and trigger further actions <strong>only when human speech is detected</strong>, even in noisy environments.</p><hr><h2 id=-why-real-time-vad-matters>🔥 Why Real-Time VAD Matters</h2><p>When building smart voice systems, it&rsquo;s wasteful (and error-prone) to analyze audio all the time. We want to:</p><ul><li>✅ Detect when someone is <strong>actually speaking</strong></li><li>❌ Ignore background noise, silence, fans, dogs barking, etc.</li><li>✅ Trigger speaker recognition or transcription <strong>only when voice is present</strong></li></ul><hr><h2 id=-what-well-use>🛠️ What We’ll Use</h2><table><thead><tr><th>Component</th><th>Purpose</th></tr></thead><tbody><tr><td><code>arecord</code></td><td>Efficient audio capture on RPi</td></tr><tr><td><code>torchaudio</code></td><td>WAV file loading</td></tr><tr><td><code>silero-vad</code></td><td>Tiny PyTorch-based voice detector</td></tr><tr><td>Raspberry Pi</td><td>Edge device to run everything locally</td></tr></tbody></table><hr><h2 id=-setup>⚙️ Setup</h2><h3 id=install-dependencies>Install Dependencies</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>pip install torchaudio soundfile silero-vad
+</span></span><span style=display:flex><span>sudo apt install sox alsa-utils
+</span></span></code></pre></div><blockquote><p>✅ Tip: Make sure your microphone shows up in <code>arecord -l</code>. Use the correct device name (e.g. <code>plughw:1,0</code>).</p></blockquote><hr><h2 id=-the-python-script-realtime_vadpy>📄 The Python Script: <code>realtime_vad.py</code></h2><p>This script:</p><ol><li>Continuously records 2-second chunks of audio</li><li>Analyzes each chunk for speech</li><li>Prints whether speech is present</li><li>Loops indefinitely</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># realtime_vad.py</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> silero_vad <span style=color:#f92672>import</span> VoiceActivityDetector
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torchaudio
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> subprocess
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> os
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> time
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>SAMPLE_RATE <span style=color:#f92672>=</span> <span style=color:#ae81ff>16000</span>
+</span></span><span style=display:flex><span>DURATION <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>  <span style=color:#75715e># seconds per chunk</span>
+</span></span><span style=display:flex><span>TEMP_FILE <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;temp_vad.wav&#34;</span>
+</span></span><span style=display:flex><span>DEVICE <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;plughw:1,0&#34;</span>  <span style=color:#75715e># adjust based on `arecord -l`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Load Silero VAD once</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;🔁 Loading Silero VAD model...&#34;</span>)
+</span></span><span style=display:flex><span>model, utils <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>hub<span style=color:#f92672>.</span>load(repo_or_dir<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;snakers4/silero-vad&#39;</span>, model<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;silero_vad&#39;</span>, trust_repo<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>(get_speech_timestamps, _, read_audio, _, _) <span style=color:#f92672>=</span> utils
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>record_wav</span>(filename<span style=color:#f92672>=</span>TEMP_FILE, duration<span style=color:#f92672>=</span>DURATION, device<span style=color:#f92672>=</span>DEVICE):
+</span></span><span style=display:flex><span>    subprocess<span style=color:#f92672>.</span>run([
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;arecord&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;-D&#34;</span>, device,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;-f&#34;</span>, <span style=color:#e6db74>&#34;S16_LE&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;-r&#34;</span>, str(SAMPLE_RATE),
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;-c&#34;</span>, <span style=color:#e6db74>&#34;1&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;-t&#34;</span>, <span style=color:#e6db74>&#34;wav&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;-d&#34;</span>, str(duration),
+</span></span><span style=display:flex><span>        filename
+</span></span><span style=display:flex><span>    ], stdout<span style=color:#f92672>=</span>subprocess<span style=color:#f92672>.</span>DEVNULL, stderr<span style=color:#f92672>=</span>subprocess<span style=color:#f92672>.</span>DEVNULL)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>is_speech_present</span>(filename<span style=color:#f92672>=</span>TEMP_FILE):
+</span></span><span style=display:flex><span>    wav <span style=color:#f92672>=</span> read_audio(filename, sampling_rate<span style=color:#f92672>=</span>SAMPLE_RATE)
+</span></span><span style=display:flex><span>    speech <span style=color:#f92672>=</span> get_speech_timestamps(wav, model, sampling_rate<span style=color:#f92672>=</span>SAMPLE_RATE)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> speech:
+</span></span><span style=display:flex><span>        total_speech <span style=color:#f92672>=</span> sum([s[<span style=color:#e6db74>&#34;end&#34;</span>] <span style=color:#f92672>-</span> s[<span style=color:#e6db74>&#34;start&#34;</span>] <span style=color:#66d9ef>for</span> s <span style=color:#f92672>in</span> speech]) <span style=color:#f92672>/</span> SAMPLE_RATE
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;🗣️ Speech detected: </span><span style=color:#e6db74>{</span>total_speech<span style=color:#e6db74>:</span><span style=color:#e6db74>.2f</span><span style=color:#e6db74>}</span><span style=color:#e6db74> seconds&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>&#34;🔇 Silence or noise only.&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>main</span>():
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;🎙️ Real-Time Voice Activity Detection Started (Ctrl+C to stop)...&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
+</span></span><span style=display:flex><span>            record_wav()
+</span></span><span style=display:flex><span>            is_speech_present()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>exists(TEMP_FILE):
+</span></span><span style=display:flex><span>                os<span style=color:#f92672>.</span>remove(TEMP_FILE)
+</span></span><span style=display:flex><span>            time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>0.5</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>KeyboardInterrupt</span>:
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>🛑 Exiting.&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;__main__&#34;</span>:
+</span></span><span style=display:flex><span>    main()
+</span></span></code></pre></div><hr><h2 id=-example-output>✅ Example Output</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>🎙️ Real-Time Voice Activity Detection Started <span style=color:#f92672>(</span>Ctrl+C to stop<span style=color:#f92672>)</span>...
+</span></span><span style=display:flex><span>🔇 Silence or noise only.
+</span></span><span style=display:flex><span>🗣️ Speech detected: 1.58 seconds
+</span></span><span style=display:flex><span>🔇 Silence or noise only.
+</span></span><span style=display:flex><span>🗣️ Speech detected: 2.00 seconds
+</span></span></code></pre></div><hr><h2 id=-how-it-works>🧠 How It Works</h2><ul><li>Silero VAD is a neural network trained to distinguish <strong>voice vs noise</strong>, even in difficult conditions.</li><li>The model runs fast on a Raspberry Pi (no GPU needed).</li><li>We record using <code>arecord</code> and process with <code>torchaudio</code>.</li></ul><hr><h2 id=-use-cases>🧪 Use Cases</h2><ul><li>✅ Smart voice-triggered assistants</li><li>✅ Voice-controlled door locks</li><li>✅ Real-time transcription only when speech is detected</li><li>✅ Edge-powered speaker recognition</li></ul><hr><h2 id=-next-steps>🔁 Next Steps</h2><p>You can integrate this directly with speaker recognition like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>if</span> is_speech_present():
+</span></span><span style=display:flex><span>    run_speaker_recognition()
+</span></span><span style=display:flex><span><span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;⏭️ Skipping – no voice detected.&#34;</span>)
+</span></span></code></pre></div><hr><h2 id=-conclusion>✅ Conclusion</h2><p>Silero VAD enables Raspberry Pi projects to <strong>detect human voice in real-time</strong>, reliably, and with very little resource usage. This is a foundational tool for anyone building <strong>smart voice interfaces</strong> in real-world environments.</p><hr><p><strong>Midway Labs</strong> – Building mindful voice tech for the real world.</p></section><nav class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"><a class="justify-end pl-3 ltr:ml-auto rtl:mr-auto" href=https://www.midway.club/posts/speechbrain-speaker-recognition/><span>Real-Time Speaker Recognition on Raspberry Pi Using SpeechBrain</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a></nav></article></main><footer class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"><div class=mr-auto>&copy;2025<a class=link href=https://www.midway.club/>Midway</a></div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>powered by hugo️️</a>️
+<a class=link href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>hugo-paper</a></footer></body></html>
